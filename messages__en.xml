@@ -1,0 +1,28 @@
+<messagebundle>
+  <msg name="Labs_Gadget_Year_View_Title">Column Year View</msg>
+  <msg name="Labs_Gadget_Year_View_Description">See the whole year at a glance with all your appointments.</msg>
+  <msg name="Labs_Gadget_Year_View_Button">Show Year View</msg>
+  <msg name="January">January</msg>
+  <msg name="February">February</msg>
+  <msg name="March">March</msg>
+  <msg name="April">April</msg>
+  <msg name="May">May</msg>
+  <msg name="June">June</msg>
+  <msg name="July">July</msg>
+  <msg name="August">August</msg>
+  <msg name="September">September</msg>
+  <msg name="October">October</msg>
+  <msg name="November">November</msg>
+  <msg name="December">December</msg>
+  <msg name="Labs_Gadget_Month_View_Tooltip">Click to display this month</msg>
+  <msg name="Short_Sunday">S</msg>
+  <msg name="Short_Monday">M</msg>
+  <msg name="Short_Tuesday">T</msg>
+  <msg name="Short_Wednesday">W</msg>
+  <msg name="Short_Thursday">T</msg>
+  <msg name="Short_Friday">F</msg>
+  <msg name="Short_Saturday">S</msg>
+  <msg name="Labs_This_Year_Button">This year</msg>
+  <msg name="Labs_Go_To_Year">Go</msg>
+</messagebundle>
+
