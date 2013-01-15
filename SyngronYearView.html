@@ -34,18 +34,18 @@ author_email="syngron(a)gmail.com">
 				return false;
 			};
 
-		</script>
-		<form style="display:block; text-align:center; margin:0; padding:0" onsubmit="return goToCanvas();">
-			<input maxlength="4" id="year" value="2013" style="width: 4em; margin:2px 0">
-			<input type=submit value="__MSG_Labs_Go_To_Year__">
-		</form>
+</script>
+<form style="display:block; text-align:center; margin:0; padding:0" onsubmit="return goToCanvas();">
+	<input maxlength="4" id="year" value="2013" style="width: 4em; margin:2px 0">
+	<input type=submit value="__MSG_Labs_Go_To_Year__">
+</form>
 
-		<script type="text/javascript">
-			document.getElementById('year').value = (new Date()).getFullYear();
-			gadgets.window.adjustHeight();
-		</script>
+<script type="text/javascript">
+	document.getElementById('year').value = (new Date()).getFullYear();
+	gadgets.window.adjustHeight();
+	</script>
 
-	</body>
+</body>
 </html>
 ]]>
 </Content>
@@ -122,9 +122,12 @@ author_email="syngron(a)gmail.com">
 			*/
 			function displayCurrentYear(opt_override) {
 				var year = opt_override || (new Date()).getFullYear();
+				currentYear = year;
 				getYearInput().value = year;
 				showYear(year);
 			}
+
+			var currentYear = (new Date()).getFullYear();
 
 			/**
 			* Display a year offset from the current one.
@@ -238,22 +241,22 @@ author_email="syngron(a)gmail.com">
 			var out = ['<table>'];
 				for (var m = 0; m < 12; ++m) {
 					out.push('<td class="outer">');
-						getMonthHtml(out, y, m);
-						out.push('</td>');
+					getMonthHtml(out, y, m);
+					out.push('</td>');
 				}
+
+				out.push('</table>');
+				document.getElementById('calDiv').innerHTML = out.join('');
 
 				month = 1;
 				getMonthEvents();
-
-				out.push('</table>');
-			document.getElementById('calDiv').innerHTML = out.join('');
 		}
 
 		var month = 1;
 
 		function getMonthEvents() {
 			if(month <= 12) {
-				year = 2013;
+				year = currentYear;
 				nxtMonth = parseInt(month)+1;
 				nxtYear = year;
 				if(nxtMonth > 12) {
