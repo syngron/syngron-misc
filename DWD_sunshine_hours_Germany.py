@@ -4,7 +4,6 @@
 #
 # Data provided by German Weather Service (Deutscher Wetterdienst, DWD): http://www.dwd.de
 # Monthly data available from: http://www.dwd.de/bvbw/appmanager/bvbw/dwdwwwDesktop?_nfpb=true&_pageLabel=_dwdwww_klima_umwelt_klimadaten_deutschland&T82002gsbDocumentPath=Navigation%2FOeffentlichkeit%2FKlima__Umwelt%2FKlimadaten%2Fkldaten__kostenfrei%2Fkldat__D__mittelwerte__node.html%3F__nnn%3Dtrue
-# Tabelle A: Mittelwerte für den aktuellen Stationsstandort (2012)
 # Sonnenscheindauer 1981 - 2010 (aktueller Standort)
 
 from mpl_toolkits.basemap import Basemap, cm
@@ -62,8 +61,8 @@ def setMap(lats, lons, data, showstations):
         if not showstations:
             y_inc = (lat_max - lat_min) / grd_res
             x_inc = (lon_max - lon_min) / grd_res
-            y_steps = np.linspace(lat_min, lat_max + grd_res, yi_inc)
-            x_steps = np.linspace(lon_min, lon_max + grd_res, xi_inc)
+            y_steps = np.linspace(lat_min, lat_max + grd_res, y_inc)
+            x_steps = np.linspace(lon_min, lon_max + grd_res, x_inc)
             x_steps, y_steps = np.meshgrid(x_steps, y_steps)
     
             zgrd = matplotlib.mlab.griddata(x, y, z, x_steps, y_steps)
