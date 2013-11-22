@@ -24,12 +24,15 @@ data_max_fix=300
 
 # resolution of the grid
 grd_res=0.01
+#grd_res=1
 
 # resolution of the map
 map_res='h'
+#map_res='c'
 
 # individual scaling or common scaling of the months
 individual=True
+#individual=False
 
 globalmin=sys.float_info.max
 globalmax=0
@@ -87,27 +90,31 @@ fig, axes = plt.subplots(figsize=(18,10))
 # otherwise month names will be in locale language
 locale.setlocale(locale.LC_ALL, 'en_US')
 
-for i in range(1,14):
-    print i
-    
-    lats=[]
-    lons=[]
-    captions=[]
-    data=[]
-    
-    with open('DWD_Sonnenschein.csv', 'rb') as f:
-        reader = csv.reader(f)
-        rownum=0
-        for row in reader:
-            if rownum>2:# and rownum<10:
-                #print row
-                lats.append(float(row[4][:2]) + float(row[4][5:7])/60.0)
-                lons.append(float(row[5][:2]) + float(row[5][5:7])/60.0)
-                captions.append(str(row[0]))
-                data.append(float(row[i+6]))
-            rownum+=1
+myrange=13
 
-    if i == 13:
+lats=[]
+lons=[]
+captions=[]
+alldata=[[] for i in range(myrange)]
+
+with open('DWD_Sonnenschein.csv', 'rb') as f:
+    reader = csv.reader(f)
+    rownum=0
+    for row in reader:
+        if rownum>2:
+            lats.append(float(row[4][:2]) + float(row[4][5:7])/60.0)
+            lons.append(float(row[5][:2]) + float(row[5][5:7])/60.0)
+            captions.append(str(row[0]))
+            for i in range(myrange):
+                alldata[i].append(float(row[i+7]))
+        rownum+=1
+
+for i in range(myrange):
+    print i
+   
+    data=alldata[i]
+
+    if i == 12:
         data = np.divide(data,12) # yearly data as mean
 
     tmpmax=np.max(data)
@@ -117,12 +124,15 @@ for i in range(1,14):
     if tmpmin < globalmin:
         globalmin=tmpmin
 
-    plt.subplot(3,6,i)
-    if i == 13:
+    plt.subplot(3,6,i+1)
+
+    if i == 12:
         plt.title('Avg. per year')
     else:
-        plt.title(calendar.month_name[i])
+        plt.title(calendar.month_name[i+1])
+
     setMap(lats, lons, data, False)
+
     if individual:
         plt.colorbar()
 
