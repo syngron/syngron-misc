@@ -289,11 +289,11 @@ author_email="syngron(a)gmail.com">
 			var out = ['<style>'];
 				out.push(
 				//'html, body { height: 100%;}',
-				'.month td {text-align: center; padding:2px 4px 1px}',
-				'.month,td.dow,td.monthHeader {background-color:', LIGHT_BLUE, '}',
+				'.month td {text-align: center; display: table; padding:2px 4px 1px}',
+				'.month,td.dow,td.monthHeader {display: table; background-color:', LIGHT_BLUE, '}',
 				'td.normal {background-color:', WHITE, '}',
 				'td.weekend {background-color:', WEEKEND, '}',
-				'td.outer {padding-right: 4px; padding-bottom: 4px; }',
+				'td.outer {padding-right: 4px; padding-bottom: 4px; display: table; }',
 				'td.dow {max-width: 5px; border-width: 0 0 1px 0; border-style:solid;',
 					'border-color: ', DIVIDER, '}',
 				'td.today {padding: 1px 3px !important; background-color:', TODAY,
@@ -305,7 +305,7 @@ author_email="syngron(a)gmail.com">
 					';border: 1px solid ', BORDER_GREY, '}',
 				'body, td {font-family:Arial;font-size: 12.8px}',
 				'body {margin-left:10px; background-color:', WHITE, '}',
-				'td {vertical-align: top}',
+				'td {vertical-align: top; display: table;}',
 				'.clickable {cursor:pointer; color:', DARK_BLUE, '}',
 				'.clickable:hover {text-decoration: underline}', 
 				'.row {display: table;}',
