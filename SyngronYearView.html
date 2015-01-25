@@ -182,7 +182,7 @@ author_email="syngron(a)gmail.com">
 				var todayDate = today.getDate();
 
 
-				out.push('<table class="month" border=0 cellspacing=0>',
+				out.push('<div style="height:100px;overflow:auto;"><table class="month" border=0 cellspacing=0>',
 					'<tr><td colspan=5 title="',
 							SHOW_MONTH, '" class="monthHeader clickable" ',
 							'onclick="showDate(', y, ',', m+1, ')">', MONTH_NAMES[m], ' ', y,
@@ -230,7 +230,7 @@ author_email="syngron(a)gmail.com">
 					//alert(output);
 
 					out.push('</td>');
-				out.push('</table>');
+				out.push('</table></div>');
 		}
 
 		/**
