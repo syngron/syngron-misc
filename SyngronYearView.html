@@ -289,8 +289,16 @@ author_email="syngron(a)gmail.com">
 			//	google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate);
 			//}
 		function eventCallback(response) {
-			function renderDate(d) {
-				return d.month + "/" + d.date;
+			function renderAllDayEvent(e) {
+				// The endTime provided by the Calendar is the day after the actual end
+				var result = e.startTime.month + "/" +  e.startTime.date;
+				var startDate = new Date(e.startTime.year, e.startTime.month-1, e.startTime.date);
+				var endDate = new Date(e.endTime.year, e.endTime.month-1, e.endTime.date-1);
+				console.log(startDate, endDate);
+				if(endDate.valueOf() != startDate.valueOf())
+					result += " - " + (endDate.getMonth() + 1) + "/" +  endDate.getDate();
+
+				return result;
 			}
 			function renderDateTime(d) {
 				var result = d.month + "/" + d.date;
@@ -330,7 +338,7 @@ author_email="syngron(a)gmail.com">
 							document.getElementById(id).className += " busy ";
 							elt.title = title + ": " + (
 								e.allDay
-								? (renderDate(e.startTime) + " - " + renderDate(e.endTime))
+								? renderAllDayEvent(e)
 								: (renderDateTime(e.startTime) + " - " + renderDateTime(e.endTime))
 							);
 							elt.innerText = title.substr(0,14);
