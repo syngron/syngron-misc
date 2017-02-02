@@ -328,8 +328,9 @@ author_email="syngron(a)gmail.com">
 							var elt = document.createElement("div");
 							document.getElementById(id).appendChild(elt);
 							document.getElementById(id).className += " busy ";
+console.log(e,e.isAllDayEvent);
 							elt.title = title + ": " +
-								e.isAllDayEvent
+								(e.isAllDayEvent == true)
 								? (renderDate(e.startTime) + " - " + renderDate(e.endTime))
 								: (renderDateTime(e.startTime) + " - " + renderDateTime(e.endTime));
 							elt.innerText = title.substr(0,14);
