@@ -53,14 +53,17 @@ author_email="syngron(a)gmail.com">
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<body>
-		<form style="margin:8px 0; display:block" onsubmit="return display(0);">
-			<button onmousedown="display(-1)">&nbsp;&laquo;&nbsp;</button>&nbsp;
-			<input id="yearInput" size="4" value="" style="width: 4em" maxlength="4">&nbsp;
-			<button onmousedown="display(1)">&nbsp;&raquo;&nbsp;</button>&nbsp;
-			<input type=submit value="__MSG_Labs_Go_To_Year__"
-			onmousedown="display(0)">&nbsp;
-			<button onmousedown="displayCurrentYear()">__MSG_Labs_This_Year_Button__
-		</button></form>
+		<form style="margin:8px 0; display:block" onsubmit="return gotoRelativeYear(0);">
+			<button onmousedown="gotoRelativeYear(-1)">&nbsp;&laquo;&nbsp;</button>
+			&nbsp;
+			<input id="yearInput" size="4" value="" style="width: 4em" maxlength="4">
+			&nbsp;
+			<button onmousedown="gotoRelativeYear(1)">&nbsp;&raquo;&nbsp;</button>
+			&nbsp;
+			<input type=submit value="__MSG_Labs_Go_To_Year__" onmousedown="gotoRelativeYear(0)">
+			&nbsp;
+			<button onmousedown="gotoCurrentYear()">__MSG_Labs_This_Year_Button__</button>
+		</form>
 		<div id=calDiv></div>
 		<script>
 			/** The full names of the months to use as titles */
@@ -108,7 +111,7 @@ author_email="syngron(a)gmail.com">
 			* Display the current year.
 			* @param {string} opt_override An override year.
 			*/
-			function displayCurrentYear(opt_override) {
+			function gotoCurrentYear(opt_override) {
 				var year = opt_override || (new Date()).getFullYear();
 				currentYear = year;
 				getYearInput().value = year;
@@ -119,7 +122,7 @@ author_email="syngron(a)gmail.com">
 			* Display a year offset from the current one.
 			* @param {number} delta How many years to move.
 			*/
-			function display(delta) {
+			function gotoRelativeYear(delta) {
 				var yearInput = getYearInput();
 				yearInput.value.replace(/[^0-9]/g, '');
 				var y = parseInt(yearInput.value, 10) + delta;
@@ -151,6 +154,22 @@ author_email="syngron(a)gmail.com">
 					google.calendar.showDate(y, m, opt_date || 1);
 				}
 			}
+
+			var isToday = (function() {
+				var today = new Date();
+				var todayYear = today.getFullYear();
+				var todayMonth = today.getMonth();
+				var todayDate = today.getDate();
+
+				return function(y,m,d) {
+					return (y == todayYear && m == todayMonth && d == todayDate);
+				};
+			})();
+
+			function isWeekend(y,m,d) {
+				var i = firstDayOfMonth % 7;
+				return (dow == 0) || (dow == 6);
+			}
 			/**
 			* Get the HTML for a specific month.
 			* @param {Array<string>} out The string buffer to append the output.
@@ -158,10 +177,6 @@ author_email="syngron(a)gmail.com">
 			* @param {number} m The month.
 			*/
 			function getMonthHtml(out, y, m) {
-				var today = new Date();
-				var todayYear = today.getFullYear();
-				var todayMonth = today.getMonth();
-				var todayDate = today.getDate();
 				out.push('<table class="month" border=0 cellspacing=0>',
 					'<tr><td colspan=5 title="',
 							SHOW_MONTH, '" class="monthHeader clickable" ',
@@ -170,33 +185,24 @@ author_email="syngron(a)gmail.com">
 					var firstDate = new Date(y, m, 1);
 					var firstDayOfMonth = firstDate.getDay();
 					var daysInMonth = getDaysInMonth(firstDate);
-					var i = firstDayOfMonth % 7;
-					output = "month :"+(m+1) +"\n";
 					for(var d = 1; d <= daysInMonth; ++d) {
-						var dow = i % 7;
+						var dow = (firstDayOfMonth + d - 1) % 7;
 						out.push('<tr>');
 							out.push('<td class="dow" style="color:black">', DOW[dow], '</td>');
 							out.push('<td colspan=4');
 								out.push(" id='"+ y + "-" + (m+1) + "-" + d + "' ");
 								out.push('class="');
 								var c = 'normal';
-								if (y == todayYear && m == todayMonth && d == todayDate){
+								if(isToday(y,m,d))
 									c = 'today';
-								}
-								if ((d <= daysInMonth) && ((dow == 0) || (dow == 6))){
-									c = 'weekend ';
-								}
+								else 
+									if(isWeekend(y,m,d))
+										c = 'weekend ';
 								out.push(c);
 								out.push(' clickable" onclick="showDate(', y, ',', m+1, ',', d,
 								')">', d, '</td>');
 							out.push('</tr>');
-						i++;
 					}
-					//var output = "month: "+(m+1)+" ";
-					//for(x in monthEvents) {
-						//  output += x + " " + monthEvents[x] + "\n";
-						//}
-					//alert(output);
 					out.push('</td>');
 				out.push('</table>');
 		}
@@ -282,7 +288,7 @@ author_email="syngron(a)gmail.com">
 		}
 		document.write(getStyles());
 		var tentativeYear = gadgets.views.getParams()['year'];
-		displayCurrentYear(tentativeYear);
+		gotoCurrentYear(tentativeYear);
 		// This is here to make it look nicer for gmail
 		gadgets.window.adjustHeight(2600);
 		//for(i=1; i<=12; i++ ) {
@@ -370,7 +376,7 @@ author_email="syngron(a)gmail.com">
 		}		
 	</script>
 </body>
-				</html>
-				]]>
-				</Content>
-				</Module>
+</html>
+]]>
+</Content>
+</Module>
