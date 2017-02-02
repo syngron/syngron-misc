@@ -29,8 +29,8 @@ author_email="syngron(a)gmail.com">
 		<script type="text/javascript">
 			function goToCanvas() {
 				var year = document.getElementById('year').value;
-				var showDetails = document.getElementById('showDetails').checked == "true";
-				console.log('Input',showDetails);
+				var showDetails = document.getElementById('showDetails').checked == true;
+				console.log('Input',document.getElementById('showDetails').checked,showDetails);
 				gadgets.views.requestNavigateTo('canvas', {'year': year, 'showDetails' : showDetails});
 				return false;
 			};
