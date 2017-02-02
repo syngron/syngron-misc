@@ -290,13 +290,18 @@ author_email="syngron(a)gmail.com">
 			//}
 		function eventCallback(response) {
 			function renderDate(d) {
+				return d.month + "/" + d.date;
+			}
+			function renderDateTime(d) {
 				var result = d.month + "/" + d.date;
-				if(d.hour && d.minute) {
-					result += " ";
-					result += (d.hour < 10) ? ("0" + d.hour) : d.hour;
-					result += ":";
-					result += (d.minute < 10) ? ("0" + d.minute) : d.minute;
-				}
+
+				var hour = d.hour ? d.hour : 0;
+				var minute = d.minute ? d.minute : 0;
+				result += " ";
+				result += (hour < 10) ? ("0" + hour) : hour;
+				result += ":";
+				result += (minute < 10) ? ("0" + minute) : minute;
+
 				return result;
 			}
 			for(var cal = 0; cal < response.length; ++cal) {
@@ -323,7 +328,10 @@ author_email="syngron(a)gmail.com">
 							var elt = document.createElement("div");
 							document.getElementById(id).appendChild(elt);
 							document.getElementById(id).className += " busy ";
-							elt.title = title + ": " + renderDate(e.startTime) + " - " + renderDate(e.endTime);
+							elt.title = title + ": " +
+								e.isAllDayEvent
+								? (renderDate(e.startTime) + " - " + renderDate(e.endTime))
+								: (renderDateTime(e.startTime) + " - " + renderDateTime(e.endTime));
 							elt.innerText = title.substr(0,14);
 							elt.style.backgroundColor = e.color;
 							if(e.location) {
