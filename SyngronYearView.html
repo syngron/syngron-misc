@@ -299,6 +299,7 @@ author_email="syngron(a)gmail.com">
 				for(var i = 0; i < events.length; ++i) {
 					var e = events[i];
 					if ('title' in e) {
+						var title = e.title.replace('&#39;',"'");
 						var startDate = new Date(e.startTime.year, (e.startTime.month-1), e.startTime.date);
 						var endDate = new Date(e.endTime.year, (e.endTime.month-1), e.endTime.date);
 						var currentDate = startDate;//new Date(startDate.getTime());
@@ -310,8 +311,8 @@ author_email="syngron(a)gmail.com">
 								continue;
 							}
 							document.getElementById(id).className += " busy ";
-							document.getElementById(id).title += e.title + " " + e.startTime.date + " " + e.endTime.date+ "; \n";
-							document.getElementById(id).innerText += "\n" + e.title.substr(0,14);
+							document.getElementById(id).title += title + " " + e.startTime.date + " " + e.endTime.date+ "; \n";
+							document.getElementById(id).innerText += "\n" + title.substr(0,14);
 							currentDate.setDate(currentDate.getDate() + 1);
 						}
 					}
