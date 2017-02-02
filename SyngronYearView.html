@@ -289,6 +289,13 @@ author_email="syngron(a)gmail.com">
 			//	google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate);
 			//}
 		function eventCallback(response) {
+			function renderDate(d) {
+				var result = d.getMonth() + "/" + d.getDate() + " ";
+				result += (d.getHours() < 10) ? ("0" + d.getHours()) : d.getHours();
+				result += ":";
+				result += (d.getMinutes() < 10) ? ("0" + d.getMinutes()) : d.getMinutes();
+				return result;
+			}
 			for(var cal = 0; cal < response.length; ++cal) {
 				if ('error' in response[cal]) {
 					alert('Something went wrong ' + response[cal]['error']);
@@ -313,7 +320,7 @@ author_email="syngron(a)gmail.com">
 							var elt = document.createElement("div");
 							document.getElementById(id).appendChild(elt);
 							document.getElementById(id).className += " busy ";
-							elt.title = title + ": " + e.startTime.date + " " + e.endTime.date;
+							elt.title = title + ": " + renderDate(e.startTime) + " - " + renderDate(e.endTime);
 							elt.innerText = title.substr(0,14);
 							elt.style.backgroundColor = e.color;
 							if(e.location) {
