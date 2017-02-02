@@ -329,6 +329,8 @@ author_email="syngron(a)gmail.com">
 							document.getElementById(id).appendChild(elt);
 							document.getElementById(id).className += " busy ";
 console.log(e,e.isAllDayEvent);
+debugger;
+elt.THISWONTWORK();
 							elt.title = title + ": " +
 								(e.isAllDayEvent == true)
 								? (renderDate(e.startTime) + " - " + renderDate(e.endTime))
