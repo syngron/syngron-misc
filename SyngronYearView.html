@@ -266,7 +266,10 @@ author_email="syngron(a)gmail.com">
 				'.clickable {cursor:pointer; color:', DARK_BLUE, '}',
 				'.clickable:hover {text-decoration: underline}', 
 				'.row {display: table;}',
-				'.busy {color: red; }');
+				'.event { color: black; }',
+				'.outside { border:2px solid black; }',
+				'.busy { color: red; }'
+				);
 				out.push('</style>');
 			return out.join('');
 		}
@@ -343,8 +346,9 @@ author_email="syngron(a)gmail.com">
 							);
 							elt.innerText = title.substr(0,14);
 							elt.style.backgroundColor = e.color;
+							elt.className = "event";
 							if(e.location) {
-								elt.style.border = "2px solid black";
+								elt.className += " outside";
  								elt.title += " [" +  e.location + "]" ;
 							}
 							currentDate.setDate(currentDate.getDate() + 1);
