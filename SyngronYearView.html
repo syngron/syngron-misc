@@ -30,6 +30,7 @@ author_email="syngron(a)gmail.com">
 			function goToCanvas() {
 				var year = document.getElementById('year').value;
 				var showDetails = document.getElementById('showDetails').checked;
+				console.log('Input',showDetails);
 				gadgets.views.requestNavigateTo('canvas', {'year': year, 'showDetails' : showDetails});
 				return false;
 			};
@@ -227,6 +228,7 @@ author_email="syngron(a)gmail.com">
 				}
 				startDate = {year: year, month: month, date: 1, hour: 0, minute: 0, second: 0};
 				endDate = {year: nxtYear, month: nxtMonth, date: 1, hour: 0, minute: 0, second: 0};
+				console.log('getParams',gadgets.views.getParams());
 				if(gadgets.views.getParams()['showDetails'])
 					google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate, { 'requestedFields': [ 'details'] });
 				else
