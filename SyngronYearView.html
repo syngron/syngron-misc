@@ -328,13 +328,11 @@ author_email="syngron(a)gmail.com">
 							var elt = document.createElement("div");
 							document.getElementById(id).appendChild(elt);
 							document.getElementById(id).className += " busy ";
-console.log(e,e.isAllDayEvent);
-debugger;
-elt.THISWONTWORK();
-							elt.title = title + ": " +
-								(e.isAllDayEvent == true)
+							elt.title = title + ": " + (
+								e.allDay
 								? (renderDate(e.startTime) + " - " + renderDate(e.endTime))
-								: (renderDateTime(e.startTime) + " - " + renderDateTime(e.endTime));
+								: (renderDateTime(e.startTime) + " - " + renderDateTime(e.endTime))
+							);
 							elt.innerText = title.substr(0,14);
 							elt.style.backgroundColor = e.color;
 							if(e.location) {
