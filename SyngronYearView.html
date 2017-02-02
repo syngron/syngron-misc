@@ -290,10 +290,10 @@ author_email="syngron(a)gmail.com">
 			//}
 		function eventCallback(response) {
 			function renderDate(d) {
-				var result = d.getMonth() + "/" + d.getDate() + " ";
-				result += (d.getHours() < 10) ? ("0" + d.getHours()) : d.getHours();
+				var result = d.month + "/" + d.date() + " ";
+				result += (d.hour < 10) ? ("0" + d.hour) : d.hour;
 				result += ":";
-				result += (d.getMinutes() < 10) ? ("0" + d.getMinutes()) : d.getMinutes();
+				result += (d.minute < 10) ? ("0" + d.minute) : d.minute;
 				return result;
 			}
 			for(var cal = 0; cal < response.length; ++cal) {
