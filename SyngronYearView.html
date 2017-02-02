@@ -310,9 +310,11 @@ author_email="syngron(a)gmail.com">
 								currentDate.setDate(currentDate.getDate() + 1);
 								continue;
 							}
-							document.getElementById(id).className += " busy ";
-							document.getElementById(id).title += title + " " + e.startTime.date + " " + e.endTime.date+ "; \n";
-							document.getElementById(id).innerText += "\n" + title.substr(0,14);
+							var elt = document.getElementById(id);
+							elt.className += " busy ";
+							elt.title += title + " " + e.startTime.date + " " + e.endTime.date+ "; \n";
+							elt.innerText += "\n" + title.substr(0,14);
+							elt.style.backgroundColor = e.color;
 							currentDate.setDate(currentDate.getDate() + 1);
 						}
 					}
