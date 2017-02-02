@@ -35,6 +35,7 @@ author_email="syngron(a)gmail.com">
 </script>
 <form style="display:block; text-align:center; margin:0; padding:0" onsubmit="return goToCanvas();">
 	<input maxlength="4" id="year" value="2013" style="width: 4em; margin:2px 0">
+	<label><input id="showDetails" type="checkbox">Details</label>
 	<input type=submit value="__MSG_Labs_Go_To_Year__">
 </form>
 <script type="text/javascript">
@@ -225,7 +226,10 @@ author_email="syngron(a)gmail.com">
 				}
 				startDate = {year: year, month: month, date: 1, hour: 0, minute: 0, second: 0};
 				endDate = {year: nxtYear, month: nxtMonth, date: 1, hour: 0, minute: 0, second: 0};
-				google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate, { 'requestedFields': [ 'details'] });
+				if(document.getElementById("showDetails").checked == true)
+					google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate, { 'requestedFields': [ 'details'] });
+				else
+					google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate);
 				month = parseInt(month)+1;
 			}
 		}
