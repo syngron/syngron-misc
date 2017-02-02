@@ -225,7 +225,7 @@ author_email="syngron(a)gmail.com">
 				}
 				startDate = {year: year, month: month, date: 1, hour: 0, minute: 0, second: 0};
 				endDate = {year: nxtYear, month: nxtMonth, date: 1, hour: 0, minute: 0, second: 0};
-				google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate);
+				google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate, ['details']);
 				month = parseInt(month)+1;
 			}
 		}
@@ -352,8 +352,8 @@ author_email="syngron(a)gmail.com">
  								elt.title += " [" +  e.location + "]" ;
 							}
 console.log(e);
-							if(e.description)
- 								elt.title += "&#10;" + e.description;
+							if(e.details)
+ 								elt.title += "&#10;" + e.details;
 							currentDate.setDate(currentDate.getDate() + 1);
 						}
 					}
