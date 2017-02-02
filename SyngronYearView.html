@@ -351,9 +351,9 @@ author_email="syngron(a)gmail.com">
 								elt.className += " outside";
  								elt.title += " [" +  e.location + "]" ;
 							}
-console.log(e);
+//console.log(e);
 							if(e.details)
- 								elt.title += "&#10;" + e.details;
+ 								elt.title += "\x0A" + e.details;
 							currentDate.setDate(currentDate.getDate() + 1);
 						}
 					}
