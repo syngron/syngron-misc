@@ -29,7 +29,8 @@ author_email="syngron(a)gmail.com">
 		<script type="text/javascript">
 			function goToCanvas() {
 				var year = document.getElementById('year').value;
-				gadgets.views.requestNavigateTo('canvas', {'year': year});
+				var showDetails = document.getElementById('showDetails').checked;
+				gadgets.views.requestNavigateTo('canvas', {'year': year, 'showDetails' : showDetails});
 				return false;
 			};
 </script>
@@ -226,7 +227,7 @@ author_email="syngron(a)gmail.com">
 				}
 				startDate = {year: year, month: month, date: 1, hour: 0, minute: 0, second: 0};
 				endDate = {year: nxtYear, month: nxtMonth, date: 1, hour: 0, minute: 0, second: 0};
-				if(document.getElementById("showDetails").checked == true)
+				if(showDetails)
 					google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate, { 'requestedFields': [ 'details'] });
 				else
 					google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate);
