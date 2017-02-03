@@ -340,7 +340,7 @@ console.log('response for cal',cal,events);
 							console.log('Day element is missing',id);
 						else {
 							// decode &#nnn style escapes
-							var title = e.title..replace(/&#(\d+);/g, function(match, dec) { return String.fromCharCode(dec); })
+							var title = e.title.replace(/&#(\d+);/g, function(match, dec) { return String.fromCharCode(dec); })
 
 							eltDay.className += " busy ";
 							var elt = document.createElement("div");
