@@ -223,7 +223,7 @@ author_email="syngron(a)gmail.com">
 		}
 		function getMonthEvents(year,month) { // optional parameters. Running copies are kept as function properties
 			if(typeof(year) != "undefined") {
-				// initial setup. These are the values that the rendering callback will use
+				// initial setup. These are the variables that the rendering callback will use
 				getMonthEvents.year = year;
 				getMonthEvents.month = month;
 			} else {
@@ -232,6 +232,7 @@ author_email="syngron(a)gmail.com">
 				month = ++getMonthEvents.month;
 			}
 
+			console.log('getMonthEvents',year,month);
 			if(month <= 12) {
 				nxtMonth = month + 1;
 				nxtYear = year;
@@ -241,7 +242,7 @@ author_email="syngron(a)gmail.com">
 				}
 				startDate = {year: year, month: month, date: 1, hour: 0, minute: 0, second: 0};
 				endDate = {year: nxtYear, month: nxtMonth, date: 1, hour: 0, minute: 0, second: 0};
-				console.log('getParams',gadgets.views.getParams());
+				console.log('google.calendar.read.getEvents',startDate,endDate,gadgets.views.getParams());
 				if(gadgets.views.getParams()['showDetails'] == "true")
 					google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate, { 'requestedFields': [ 'details'] });
 				else
@@ -328,6 +329,7 @@ author_email="syngron(a)gmail.com">
 					return;
 				}
 				var events = response[cal]['events'];
+console.log('response for cal',cal,events);
 				var output = "";
 				for(var i = 0; i < events.length; ++i) {
 					var e = events[i];
@@ -337,7 +339,8 @@ author_email="syngron(a)gmail.com">
 						if(eltDay == null)
 							console.log('Day element is missing',id);
 						else {
-							var title = e.title.replace('&#39;',"'");
+							// decode &#nnn style escapes
+							var title = e.title..replace(/&#(\d+);/g, function(match, dec) { return String.fromCharCode(dec); })
 
 							eltDay.className += " busy ";
 							var elt = document.createElement("div");
