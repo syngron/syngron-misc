@@ -53,16 +53,16 @@ author_email="syngron(a)gmail.com">
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<body>
-		<form style="margin:8px 0; display:block" onsubmit="return gotoSpecifiedYear(0);">
-			<button onmousedown="gotoSpecifiedYear(-1)">&nbsp;&laquo;&nbsp;</button>
+		<form style="margin:8px 0; display:block" onsubmit="return gotoInputYearWithDelta(0);">
+			<button onmousedown="gotoInputYearWithDelta(-1)">&nbsp;&laquo;&nbsp;</button>
 			&nbsp;
 			<input id="yearInput" size="4" value="" style="width: 4em" maxlength="4">
 			&nbsp;
-			<button onmousedown="gotoSpecifiedYear(1)">&nbsp;&raquo;&nbsp;</button>
+			<button onmousedown="gotoInputYearWithDelta(1)">&nbsp;&raquo;&nbsp;</button>
 			&nbsp;
-			<input type=submit value="__MSG_Labs_Go_To_Year__" onmousedown="gotoSpecifiedYear(0)">
+			<input type=submit value="__MSG_Labs_Go_To_Year__" onmousedown="gotoInputYearWithDelta(0)">
 			&nbsp;
-			<button onmousedown="gotoCurrentYear()">__MSG_Labs_This_Year_Button__</button>
+			<button onmousedown="gotoYear()">__MSG_Labs_This_Year_Button__</button>
 		</form>
 		<div id=calDiv></div>
 		<script>
@@ -111,19 +111,19 @@ author_email="syngron(a)gmail.com">
 			* Display the current year.
 			* @param {string} opt_override An override year.
 			*/
-			function gotoCurrentYear(opt_override) {
-				var year = opt_override || (new Date()).getFullYear();
-				currentYear = year;
+			function gotoYear(pYear) {
+				var year = pYear || (new Date()).getFullYear();
 				getYearInput().value = year;
 				showYear(year);
 			}
-			var currentYear = (new Date()).getFullYear();
 			/**
-			* Display a year offset from the current one.
+			* Display a year offset from the YearInput form field
 			* @param {number} delta How many years to move.
 			*/
-			function gotoSpecifiedYear(delta) {
+			function gotoInputYearWithDelta(delta) {
 				var yearInput = getYearInput();
+
+				// scrub the value
 				yearInput.value.replace(/[^0-9]/g, '');
 				var y = parseInt(yearInput.value, 10) + delta;
 				if (isNaN(y) || y > 9999 || y < 1){
@@ -294,7 +294,7 @@ author_email="syngron(a)gmail.com">
 			return out.join('');
 		}
 		document.write(getStyles());
-		gotoCurrentYear(gadgets.views.getParams()['year']);
+		gotoYear(parseInt(gadgets.views.getParams()['year'],10));
 
 		// This is here to make it look nicer for gmail
 		gadgets.window.adjustHeight(2600);
@@ -305,7 +305,7 @@ author_email="syngron(a)gmail.com">
 				var result = e.startTime.month + "/" +  e.startTime.date;
 				var startDate = new Date(e.startTime.year, e.startTime.month-1, e.startTime.date);
 				var endDate = new Date(e.endTime.year, e.endTime.month-1, e.endTime.date-1);
-				console.log(startDate, endDate);
+				//console.log(startDate, endDate);
 				if(endDate.valueOf() != startDate.valueOf())
 					result += " - " + (endDate.getMonth() + 1) + "/" +  endDate.getDate();
 
