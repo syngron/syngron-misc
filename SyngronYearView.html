@@ -334,33 +334,45 @@ console.log('response for cal',cal,events);
 				for(var i = 0; i < events.length; ++i) {
 					var e = events[i];
 					if ('title' in e) {
-						id = e.startTime.year + "-" + e.startTime.month + "-" + e.startTime.date;
-						var eltDay = document.getElementById(id);
-						if(eltDay == null)
-							console.log('Day element is missing',id);
-						else {
-							// decode &#nnn style escapes
-							var title = e.title.replace(/&#(\d+);/g, function(match, dec) { return String.fromCharCode(dec); })
+						// Loop over all days overlapping with the event
+						var startDate = new Date(e.startTime.year, (e.startTime.month-1), e.startTime.date);
+						var endDate = e.allDay
+								? new Date(e.endTime.year, (e.endTime.month-1), e.endTime.date - 1)
+								: new Date(e.endTime.year, (e.endTime.month-1), e.endTime.date);
+						console.log("event render", e.title, e.startTime, e.endTime, e.allDay, startDate, endDate);
+						for(var d = startDate;
+							d.getTime() <= endDate.getTime();
+							d.setDate(d.getDate() + 1)
+						) {
 
-							eltDay.className += " busy ";
-							var elt = document.createElement("div");
-							eltDay.appendChild(elt);
-							elt.title = title + ": " + (
-								e.allDay
-								? renderAllDayEvent(e)
-								: (renderDateTime(e.startTime) + " - " + renderDateTime(e.endTime))
-							);
-							elt.innerText = title.substr(0,14);
-							elt.style.backgroundColor = e.color;
-							elt.className = "event";
-							if(e.location) {
-								elt.className += " outside";
- 								elt.title += " [" +  e.location + "]" ;
-							}
+							id = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
+							var eltDay = document.getElementById(id);
+							if(eltDay == null)
+								console.log('Day element is missing',id);
+							else {
+								// decode &#nnn style escapes
+								var title = e.title.replace(/&#(\d+);/g, function(match, dec) { return String.fromCharCode(dec); })
+
+								eltDay.className += " busy ";
+								var elt = document.createElement("div");
+								eltDay.appendChild(elt);
+								elt.title = title + ": " + (
+									e.allDay
+									? renderAllDayEvent(e)
+									: (renderDateTime(e.startTime) + " - " + renderDateTime(e.endTime))
+								);
+								elt.innerText = title.substr(0,14);
+								elt.style.backgroundColor = e.color;
+								elt.className = "event";
+								if(e.location) {
+									elt.className += " outside";
+									elt.title += " [" +  e.location + "]" ;
+								}
 //console.log(e);
-							if(e.details)
- 								elt.title += "\x0A" + e.details;
-						} //else
+								if(e.details)
+									elt.title += "\x0A" + e.details;
+							} //else
+						} //for
 					} //if
 				} //for
 			} //for
