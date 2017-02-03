@@ -335,10 +335,11 @@ console.log('response for cal',cal,events);
 					var e = events[i];
 					if ('title' in e) {
 						// Loop over all days overlapping with the event
-						var startDate = new Date(e.startTime.year, (e.startTime.month-1), e.endTime.date);
+						var startDate = new Date(e.startTime.year, (e.startTime.month-1), e.startTime.date);
 						var endDate = e.allDay
 								? new Date(e.endTime.year, (e.endTime.month-1), e.endTime.date - 1)
 								: new Date(e.endTime.year, (e.endTime.month-1), e.endTime.date);
+						console.log(e.startTime, e.endTime, e.allDay, startDate, endDate);
 						for(var d = startDate;
 							d.getTime() < endDate.getTime();
 							d.setDate(d.getDate() + 1)
