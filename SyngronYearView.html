@@ -339,7 +339,7 @@ console.log('response for cal',cal,events);
 						var endDate = e.allDay
 								? new Date(e.endTime.year, (e.endTime.month-1), e.endTime.date - 1)
 								: new Date(e.endTime.year, (e.endTime.month-1), e.endTime.date);
-						console.log(e.startTime, e.endTime, e.allDay, startDate, endDate);
+						console.log("event render", e.title, e.startTime, e.endTime, e.allDay, startDate, endDate);
 						for(var d = startDate;
 							d.getTime() < endDate.getTime();
 							d.setDate(d.getDate() + 1)
