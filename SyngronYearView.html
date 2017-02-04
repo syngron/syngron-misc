@@ -1,7 +1,7 @@
 <Module>
 <ModulePrefs
 height="26"
-title="__MSG_Labs_Gadget_Year_View_Title__ v1.1"
+title="__MSG_Labs_Gadget_Year_View_Title__ v1.2"
 description="__MSG_Labs_Gadget_Year_View_Description__"
 author="Syngron syngron.blogspot.com (based on Google code: http://www.google.com/ig/modules/calendar/year/year.xml, inspired by Grzegorz Pawlik year view)"
 author_email="syngron(a)gmail.com">
@@ -155,6 +155,16 @@ author_email="syngron(a)gmail.com">
 				}
 			}
 
+			/**
+			* Ask the calendar to show a specific event
+			*/
+			function showEvent(id) {
+				if (google && google.calendar) {
+					google.calendar.showEvent(id);
+				}
+			}
+
+
 			var isToday = (function() {
 				var today = new Date();
 				var todayYear = today.getFullYear();
@@ -188,7 +198,10 @@ author_email="syngron(a)gmail.com">
 					for(var d = 1; d <= daysInMonth; ++d) {
 						var dow = (firstDayOfMonth + d - 1) % 7;
 						out.push('<tr>');
-							out.push('<td class="dow" style="color:black">', DOW[dow], '</td>');
+							out.push('<td class="dow" style="color:black"', '>',
+								DOW[dow],
+								'</td>'
+							);
 							out.push('<td colspan=4');
 								out.push(" id='"+ y + "-" + (m+1) + "-" + d + "' ");
 								out.push('class="');
@@ -197,10 +210,10 @@ author_email="syngron(a)gmail.com">
 									c = 'today';
 								else 
 									if(isWeekend(y,m,d))
-										c = 'weekend ';
-								out.push(c);
-								out.push(' clickable" onclick="showDate(', y, ',', m+1, ',', d,
-								')">', d, '</td>');
+										c = 'weekend';
+								out.push(c, ' clickable', '"');
+								out.push(' onclick="showDate(', y, ',', m+1, ',', d, ')"');
+								out.push('>',d,'</td>');
 							out.push('</tr>');
 					}
 					out.push('</td>');
@@ -363,7 +376,8 @@ console.log('response for cal',cal,events);
 								);
 								elt.innerText = title.substr(0,14);
 								elt.style.backgroundColor = e.color;
-								elt.className = "event";
+								elt.className = "event clickable";
+								elt.setAttribute('onclick', ['showEvent("', e.id, '")'].join(''));
 								if(e.location) {
 									elt.className += " outside";
 									elt.title += " [" +  e.location + "]" ;
