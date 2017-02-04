@@ -396,7 +396,8 @@ console.log('response for cal',cal,events);
 			} //for
 
 			// Adjust after rendering from callback is finished
-			gadgets.window.adjustHeight();
+			//gadgets.window.adjustHeight(); // doesnt do anything
+			document.getElementById("calDiv").style.height = document.body.clientHeight - 80; // using scrolling
 
 			// Fetch next months events
 			getMonthEvents();
