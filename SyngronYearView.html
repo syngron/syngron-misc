@@ -65,6 +65,13 @@ author_email="syngron(a)gmail.com">
 			<button onmousedown="gotoYear()">__MSG_Labs_This_Year_Button__</button>
 		</form>
 		<div id=calDiv></div>
+        	<script>
+              		_IG_RegisterOnloadHandler(init);
+              		function init() {
+                		// Resize iframe height to fit content.
+                		_IG_AdjustIFrameHeight();              
+              		}
+        	</script>
 		<script>
 			/** The full names of the months to use as titles */
 			var MONTH_NAMES = ["__MSG_January__", "__MSG_February__", "__MSG_March__",
