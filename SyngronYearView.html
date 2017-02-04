@@ -264,8 +264,6 @@
 					google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate, { 'requestedFields': [ 'details'] });
 				else
 					google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate);
-			} else {
- 				gadgets.window.adjustHeight();
 			}
 		}
 		// Setup the style + buttons
@@ -396,6 +394,11 @@ console.log('response for cal',cal,events);
 					} //if
 				} //for
 			} //for
+
+			// Adjust after rendering from callback is finished
+			gadgets.window.adjustHeight();
+
+			// Fetch next months events
 			getMonthEvents();
 		}		
 	</script>
