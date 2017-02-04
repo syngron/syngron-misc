@@ -52,7 +52,7 @@
 </html>
 ]]>
 </Content>
-<Content type="html" view="canvas">
+<Content type="html" view="canvas" preferred_height="900">
 <![CDATA[
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -68,7 +68,7 @@
 			&nbsp;
 			<button onmousedown="gotoYear()">__MSG_Labs_This_Year_Button__</button>
 		</form>
-		<div id=calDiv></div>
+		<div id="calDiv" style="overflow-y:auto"></div>
 		<script>
 			/** The full names of the months to use as titles */
 			var MONTH_NAMES = ["__MSG_January__", "__MSG_February__", "__MSG_March__",
