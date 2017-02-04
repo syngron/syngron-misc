@@ -1,16 +1,21 @@
 <Module>
 <ModulePrefs
-height="26"
-title="__MSG_Labs_Gadget_Year_View_Title__ v1.2"
-description="__MSG_Labs_Gadget_Year_View_Description__"
-author="Syngron syngron.blogspot.com (based on Google code: http://www.google.com/ig/modules/calendar/year/year.xml, inspired by Grzegorz Pawlik year view)"
-author_email="syngron(a)gmail.com">
-<Require feature="views" />
-<Require feature="google.calendar-0.5" />
-<Require feature="google.calendar-0.5.read" />
-<Require feature="dynamic-height"/>
-<Locale messages="messages__en.xml"/>
+	height="26"
+	title="__MSG_Labs_Gadget_Year_View_Title__ v1.2"
+  	description="__MSG_Labs_Gadget_Year_View_Description__"
+  	author="Syngron syngron.blogspot.com (based on Google code: http://www.google.com/ig/modules/calendar/year/year.xml, inspired by Grzegorz Pawlik year view)"
+  	author_email="syngron(a)gmail.com">
+  <Require feature="views" />
+  <Require feature="google.calendar-0.5" />
+  <Require feature="google.calendar-0.5.read" />
+  <Require feature="dynamic-height"/>
+  <Locale messages="messages__en.xml"/>
 </ModulePrefs>
+<UserPref name="scroll" display_name="Display scrollbar" default_value="auto" datatype="enum">
+    <EnumValue value="auto" display_value="Automatic"/>
+    <EnumValue value="no" display_value="No"/>
+    <EnumValue value="yes" display_value="Yes"/>
+</UserPref>
 <Content type="html" view="home,profile">
 <![CDATA[
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -30,7 +35,6 @@ author_email="syngron(a)gmail.com">
 			function goToCanvas() {
 				var year = document.getElementById('year').value;
 				var showDetails = document.getElementById('showDetails').checked == true;
-				console.log('Input',document.getElementById('showDetails').checked,showDetails);
 				gadgets.views.requestNavigateTo('canvas', {'year': year, 'showDetails' : showDetails});
 				return false;
 			};
@@ -65,13 +69,6 @@ author_email="syngron(a)gmail.com">
 			<button onmousedown="gotoYear()">__MSG_Labs_This_Year_Button__</button>
 		</form>
 		<div id=calDiv></div>
-        	<script>
-              		_IG_RegisterOnloadHandler(init);
-              		function init() {
-                		// Resize iframe height to fit content.
-                		_IG_AdjustIFrameHeight();              
-              		}
-        	</script>
 		<script>
 			/** The full names of the months to use as titles */
 			var MONTH_NAMES = ["__MSG_January__", "__MSG_February__", "__MSG_March__",
@@ -267,6 +264,8 @@ author_email="syngron(a)gmail.com">
 					google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate, { 'requestedFields': [ 'details'] });
 				else
 					google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate);
+			} else {
+ 				gadgets.window.adjustHeight();
 			}
 		}
 		// Setup the style + buttons
@@ -359,7 +358,7 @@ console.log('response for cal',cal,events);
 						var endDate = e.allDay
 								? new Date(e.endTime.year, (e.endTime.month-1), e.endTime.date - 1)
 								: new Date(e.endTime.year, (e.endTime.month-1), e.endTime.date);
-						console.log("event render", e.title, e.startTime, e.endTime, e.allDay, startDate, endDate);
+						//console.log("event render", e.title, e.startTime, e.endTime, e.allDay, startDate, endDate);
 						for(var d = startDate;
 							d.getTime() <= endDate.getTime();
 							d.setDate(d.getDate() + 1)
