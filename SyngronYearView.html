@@ -198,8 +198,7 @@ author_email="syngron(a)gmail.com">
 					for(var d = 1; d <= daysInMonth; ++d) {
 						var dow = (firstDayOfMonth + d - 1) % 7;
 						out.push('<tr>');
-							out.push('<td class="dow clickable" style="color:black"',
-								' onclick="showDate(', y, ',', m+1, ',', d, ')"', '>',
+							out.push('<td class="dow" style="color:black"', '>',
 								DOW[dow],
 								'</td>'
 							);
@@ -211,8 +210,9 @@ author_email="syngron(a)gmail.com">
 									c = 'today';
 								else 
 									if(isWeekend(y,m,d))
-										c = 'weekend ';
-								out.push(c, '"');
+										c = 'weekend';
+								out.push(c, ' clickable', '"');
+								out.push(' onclick="showDate(', y, ',', m+1, ',', d, ')"');
 								out.push('>',d,'</td>');
 							out.push('</tr>');
 					}
