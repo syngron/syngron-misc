@@ -198,8 +198,11 @@ author_email="syngron(a)gmail.com">
 					for(var d = 1; d <= daysInMonth; ++d) {
 						var dow = (firstDayOfMonth + d - 1) % 7;
 						out.push('<tr>');
-							out.push('<td class="dow clickable" style="color:black">', DOW[dow]);
-							out.push('onclick="showDate(', y, ',', m+1, ',', d, ')"', '</td>');
+							out.push('<td class="dow clickable" style="color:black"',
+								'onclick="showDate(', y, ',', m+1, ',', d, ')",'>',
+								DOW[dow],
+								'</td>'
+							);
 							out.push('<td colspan=4');
 								out.push(" id='"+ y + "-" + (m+1) + "-" + d + "' ");
 								out.push('class="');
