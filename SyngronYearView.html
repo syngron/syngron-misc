@@ -34,14 +34,30 @@
 		<script type="text/javascript">
 			function goToCanvas() {
 				var year = document.getElementById('year').value;
+				var month = document.getElementById('startMonthInput').value;
 				var showDetails = document.getElementById('showDetails').checked == true;
-				gadgets.views.requestNavigateTo('canvas', {'year': year, 'showDetails' : showDetails});
+				gadgets.views.requestNavigateTo('canvas', {'year': year, 'startMonth': month, 'showDetails' : showDetails});
 				return false;
 			};
 </script>
 <form style="display:block; text-align:center; margin:0; padding:0" onsubmit="return goToCanvas();">
 	<input maxlength="4" id="year" value="2013" style="width: 4em; margin:2px 0">
+	<select id="startMonthInput">
+		<option>1</option>
+		<option>2</option>
+		<option>3</option>
+		<option>4</option>
+		<option>5</option>
+		<option>6</option>
+		<option>7</option>
+		<option>8</option>
+		<option>9</option>
+		<option>10</option>
+		<option>11</option>
+		<option>12</option>
+	</select>
 	<label><input id="showDetails" type="checkbox">Details</label>
+	&nbsp;
 	<input type=submit value="__MSG_Labs_Go_To_Year__">
 </form>
 <script type="text/javascript">
@@ -62,13 +78,6 @@
 			&nbsp;
 			<input id="yearInput" size="4" value="" style="width: 4em" maxlength="4">
 			&nbsp;
-			<select id="startMonthInput">
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-			</select>
-			&nbsp;
 			<button onmousedown="gotoInputYMwithYearDelta(1)">&nbsp;&raquo;&nbsp;</button>
 			&nbsp;
 			<input type=submit value="__MSG_Labs_Go_To_Year__" onmousedown="gotoInputYMwithYearDelta(0)">
@@ -77,6 +86,10 @@
 		</form>
 		<div id="calDiv" style="overflow-y:auto"></div>
 		<script>
+			var gShowDetails = gadgets.views.getParams()['showDetails'] == "true";
+			var gStartMonth = parseInt(gadgets.views.getParams()['startMonth']);
+			console.log(gShowDetails, gStartMonth);
+		
 			/** The full names of the months to use as titles */
 			var MONTH_NAMES = ["__MSG_January__", "__MSG_February__", "__MSG_March__",
 			"__MSG_April__", "__MSG_May__", "__MSG_June__", "__MSG_July__",
@@ -236,18 +249,17 @@
 		*/
 		// showYear => (output months); => getMonthEvents => receive callback => render, getMonthEvents
 		function showYear(y) {
-			var startMonth = parseInt(document.getElementById('startMonthInput').value)
 			var out = ['<table>'];
 
 			// render
 			for (var m = 0; m < 12; ++m) {
 				out.push('<td class="outer">');
-				getMonthHtml(out, (y + Math.floor((m+startMonth)/12), (m + startMonth) % 12);
+				getMonthHtml(out, (y + Math.floor((m+gStartMonth)/12)), (m + gStartMonth) % 12);
 				out.push('</td>');
 			}
 			out.push('</table>');
 			document.getElementById('calDiv').innerHTML = out.join('');
-			getMonthEvents(y, startMonth);
+			getMonthEvents(y, gStartMonth);
 		}
 		function getMonthEvents(year,month) { // optional parameters. Running copies are kept as function properties
 			if(typeof(year) != "undefined") {
@@ -276,7 +288,7 @@
 				startDate = {year: year, month: month, date: 1, hour: 0, minute: 0, second: 0};
 				endDate = {year: nxtYear, month: nxtMonth, date: 1, hour: 0, minute: 0, second: 0};
 				console.log('google.calendar.read.getEvents',startDate,endDate,gadgets.views.getParams());
-				if(gadgets.views.getParams()['showDetails'] == "true")
+				if(gShowDetails)
 					google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate, { 'requestedFields': [ 'details'] });
 				else
 					google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate);
