@@ -1,6 +1,6 @@
 <Module>
 <ModulePrefs
-	height="26"
+	height="52"
 	title="__MSG_Labs_Gadget_Year_View_Title__ v1.2"
   	description="__MSG_Labs_Gadget_Year_View_Description__"
   	author="Syngron syngron.blogspot.com (based on Google code: http://www.google.com/ig/modules/calendar/year/year.xml, inspired by Grzegorz Pawlik year view)"
@@ -57,8 +57,8 @@
 		<option>12</option>
 	</select>
 	<label><input id="showDetails" type="checkbox">Details</label>
-	&nbsp;
-	<input type=submit value="__MSG_Labs_Go_To_Year__">
+	<br/>
+	<input type=submit style="float:left" value="__MSG_Labs_Go_To_Year__">
 </form>
 <script type="text/javascript">
 	document.getElementById('year').value = (new Date()).getFullYear();
@@ -254,7 +254,7 @@
 			// render
 			for (var m = 0; m < 12; ++m) {
 				out.push('<td class="outer">');
-				getMonthHtml(out, (y + Math.floor((m+gStartMonth)/12)), (m + gStartMonth) % 12);
+				getMonthHtml(out, (y + Math.floor((m+gStartMonth-1)/12)), (m + gStartMonth-1) % 12);
 				out.push('</td>');
 			}
 			out.push('</table>');
