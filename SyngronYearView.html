@@ -1,7 +1,7 @@
 <Module>
 <ModulePrefs
-	height="26"
-	title="__MSG_Labs_Gadget_Year_View_Title__ v1.2"
+	height="52"
+	title="__MSG_Labs_Gadget_Year_View_Title__ v1.3"
   	description="__MSG_Labs_Gadget_Year_View_Description__"
   	author="Syngron syngron.blogspot.com (based on Google code: http://www.google.com/ig/modules/calendar/year/year.xml, inspired by Grzegorz Pawlik year view)"
   	author_email="syngron(a)gmail.com">
@@ -19,7 +19,7 @@
 <Content type="html" view="home,profile">
 <![CDATA[
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html>s
 	<body>
 		<style>
 			body {
@@ -34,15 +34,31 @@
 		<script type="text/javascript">
 			function goToCanvas() {
 				var year = document.getElementById('year').value;
+				var month = document.getElementById('startMonthInput').value;
 				var showDetails = document.getElementById('showDetails').checked == true;
-				gadgets.views.requestNavigateTo('canvas', {'year': year, 'showDetails' : showDetails});
+				gadgets.views.requestNavigateTo('canvas', {'year': year, 'startMonth': month, 'showDetails' : showDetails});
 				return false;
 			};
 </script>
 <form style="display:block; text-align:center; margin:0; padding:0" onsubmit="return goToCanvas();">
 	<input maxlength="4" id="year" value="2013" style="width: 4em; margin:2px 0">
+	<select id="startMonthInput">
+		<option>1</option>
+		<option>2</option>
+		<option>3</option>
+		<option>4</option>
+		<option>5</option>
+		<option>6</option>
+		<option>7</option>
+		<option>8</option>
+		<option>9</option>
+		<option>10</option>
+		<option>11</option>
+		<option>12</option>
+	</select>
 	<label><input id="showDetails" type="checkbox">Details</label>
-	<input type=submit value="__MSG_Labs_Go_To_Year__">
+	<br/>
+	<input type=submit style="float:left" value="__MSG_Labs_Go_To_Year__">
 </form>
 <script type="text/javascript">
 	document.getElementById('year').value = (new Date()).getFullYear();
@@ -57,19 +73,23 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<body>
-		<form style="margin:8px 0; display:block" onsubmit="return gotoInputYearWithDelta(0);">
-			<button onmousedown="gotoInputYearWithDelta(-1)">&nbsp;&laquo;&nbsp;</button>
+		<form style="margin:8px 0; display:block" onsubmit="return gotoInputYMwithYearDelta(0);">
+			<button onmousedown="gotoInputYMwithYearDelta(-1)">&nbsp;&laquo;&nbsp;</button>
 			&nbsp;
 			<input id="yearInput" size="4" value="" style="width: 4em" maxlength="4">
 			&nbsp;
-			<button onmousedown="gotoInputYearWithDelta(1)">&nbsp;&raquo;&nbsp;</button>
+			<button onmousedown="gotoInputYMwithYearDelta(1)">&nbsp;&raquo;&nbsp;</button>
 			&nbsp;
-			<input type=submit value="__MSG_Labs_Go_To_Year__" onmousedown="gotoInputYearWithDelta(0)">
+			<input type=submit value="__MSG_Labs_Go_To_Year__" onmousedown="gotoInputYMwithYearDelta(0)">
 			&nbsp;
 			<button onmousedown="gotoYear()">__MSG_Labs_This_Year_Button__</button>
 		</form>
 		<div id="calDiv" style="overflow-y:auto"></div>
 		<script>
+			var gShowDetails = gadgets.views.getParams()['showDetails'] == "true";
+			var gStartMonth = parseInt(gadgets.views.getParams()['startMonth']);
+			console.log(gShowDetails, gStartMonth);
+		
 			/** The full names of the months to use as titles */
 			var MONTH_NAMES = ["__MSG_January__", "__MSG_February__", "__MSG_March__",
 			"__MSG_April__", "__MSG_May__", "__MSG_June__", "__MSG_July__",
@@ -108,7 +128,7 @@
 			* Get the text input for the year.
 			* @return {HTMLElement} The element.
 			*/
-			function getYearInput() {
+			function getYearInputElement() {
 				return document.getElementById('yearInput');
 			}
 			/**
@@ -117,15 +137,15 @@
 			*/
 			function gotoYear(pYear) {
 				var year = pYear || (new Date()).getFullYear();
-				getYearInput().value = year;
+				getYearInputElement().value = year;
 				showYear(year);
 			}
 			/**
 			* Display a year offset from the YearInput form field
 			* @param {number} delta How many years to move.
 			*/
-			function gotoInputYearWithDelta(delta) {
-				var yearInput = getYearInput();
+			function gotoInputYMwithYearDelta(delta) {
+				var yearInput = getYearInputElement();
 
 				// scrub the value
 				yearInput.value.replace(/[^0-9]/g, '');
@@ -227,26 +247,34 @@
 		* This is the main drawing function. It will display a specific year.
 		* @param {number} year The year to draw.
 		*/
+		// showYear => (output months); => getMonthEvents => receive callback => render, getMonthEvents
 		function showYear(y) {
 			var out = ['<table>'];
-				for (var m = 0; m < 12; ++m) {
-					out.push('<td class="outer">');
-					getMonthHtml(out, y, m);
-					out.push('</td>');
-				}
-				out.push('</table>');
-				document.getElementById('calDiv').innerHTML = out.join('');
-				getMonthEvents(y,1);
+
+			// render
+			for (var m = 0; m < 12; ++m) {
+				out.push('<td class="outer">');
+				getMonthHtml(out, (y + Math.floor((m+gStartMonth-1)/12)), (m + gStartMonth-1) % 12);
+				out.push('</td>');
+			}
+			out.push('</table>');
+			document.getElementById('calDiv').innerHTML = out.join('');
+			getMonthEvents(y, gStartMonth);
 		}
 		function getMonthEvents(year,month) { // optional parameters. Running copies are kept as function properties
 			if(typeof(year) != "undefined") {
 				// initial setup. These are the variables that the rendering callback will use
+				;
 				getMonthEvents.year = year;
 				getMonthEvents.month = month;
 			} else {
 				// Bump. Note we don't support going past 12 months.
 				year = getMonthEvents.year;
 				month = ++getMonthEvents.month;
+				if(month > 12) {
+					year++;
+					month -= 12;
+				}
 			}
 
 			console.log('getMonthEvents',year,month);
@@ -260,7 +288,7 @@
 				startDate = {year: year, month: month, date: 1, hour: 0, minute: 0, second: 0};
 				endDate = {year: nxtYear, month: nxtMonth, date: 1, hour: 0, minute: 0, second: 0};
 				console.log('google.calendar.read.getEvents',startDate,endDate,gadgets.views.getParams());
-				if(gadgets.views.getParams()['showDetails'] == "true")
+				if(gShowDetails)
 					google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate, { 'requestedFields': [ 'details'] });
 				else
 					google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate);
@@ -297,7 +325,7 @@
 				'td.monthHeader {font-weight:bold}',
 				'.month {table-layout: fixed; width: 100%; background-color:', LIGHT_BLUE,
 					';border: 1px solid ', BORDER_GREY, '}',
-				'body, td {font-family:Arial;font-size: 12.8px}',
+				'body, td {font-family:Arial;font-size: 11px}',
 				'body {margin-left:10px; background-color:', WHITE, '}',
 				'td {vertical-align: top}',
 				'.clickable {cursor:pointer; color:', DARK_BLUE, '}',
