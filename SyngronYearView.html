@@ -1,10 +1,10 @@
 <Module>
 <ModulePrefs
 	height="52"
-	title="__MSG_Labs_Gadget_Year_View_Title__ v1.3"
+	title="__MSG_Labs_Gadget_Year_View_Title__ v1.4"
   	description="__MSG_Labs_Gadget_Year_View_Description__"
-  	author="Syngron syngron.blogspot.com (based on Google code: http://www.google.com/ig/modules/calendar/year/year.xml, inspired by Grzegorz Pawlik year view)"
-  	author_email="syngron(a)gmail.com">
+  	author="David Hawley DaveHawley.com, based on Syngron syngron.blogspot.com, in turn based on Google code: http://www.google.com/ig/modules/calendar/year/year.xml, inspired by Grzegorz Pawlik year view)"
+  	author_email="info(a)davehawley.com">
   <Require feature="views" />
   <Require feature="google.calendar-0.5" />
   <Require feature="google.calendar-0.5.read" />
@@ -62,13 +62,12 @@
 </form>
 <script type="text/javascript">
 	document.getElementById('year').value = (new Date()).getFullYear();
-	gadgets.window.adjustHeight();
 	</script>
 </body>
 </html>
 ]]>
 </Content>
-<Content type="html" view="canvas" preferred_height="900">
+<Content type="html" view="canvas" preferred_height="800">
 <![CDATA[
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -84,7 +83,7 @@
 			&nbsp;
 			<button onmousedown="gotoYear()">__MSG_Labs_This_Year_Button__</button>
 		</form>
-		<div id="calDiv" style="overflow-y:auto"></div>
+		<div id="calDiv" style="overflow-y:visible"></div>
 		<script>
 			var gShowDetails = gadgets.views.getParams()['showDetails'] == "true";
 			var gStartMonth = parseInt(gadgets.views.getParams()['startMonth']);
@@ -131,6 +130,12 @@
 			function getYearInputElement() {
 				return document.getElementById('yearInput');
 			}
+
+			function onRendered() {
+				console.log("OnRendered");
+				gadgets.window.adjustHeight();
+			}
+
 			/**
 			* Display the current year.
 			* @param {string} opt_override An override year.
@@ -138,7 +143,7 @@
 			function gotoYear(pYear) {
 				var year = pYear || (new Date()).getFullYear();
 				getYearInputElement().value = year;
-				showYear(year);
+				showYear(year, onRendered);
 			}
 			/**
 			* Display a year offset from the YearInput form field
@@ -154,7 +159,7 @@
 					yearInput.value = '?';
 				} else {
 					yearInput.value = y;
-					showYear(y);
+					showYear(y, onRendered);
 				}
 				return false;
 			}   
@@ -243,12 +248,13 @@
 					out.push('</td>');
 				out.push('</table>');
 		}
+
 		/**
 		* This is the main drawing function. It will display a specific year.
 		* @param {number} year The year to draw.
 		*/
 		// showYear => (output months); => getMonthEvents => receive callback => render, getMonthEvents
-		function showYear(y) {
+		function showYear(y, callback) {
 			var out = ['<table>'];
 
 			// render
@@ -259,6 +265,7 @@
 			}
 			out.push('</table>');
 			document.getElementById('calDiv').innerHTML = out.join('');
+			getMonthEvents.onComplete = callback;
 			getMonthEvents(y, gStartMonth);
 		}
 		function getMonthEvents(year,month) { // optional parameters. Running copies are kept as function properties
@@ -292,6 +299,10 @@
 					google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate, { 'requestedFields': [ 'details'] });
 				else
 					google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate);
+			} else {
+				//Done!
+				if(getMonthEvents.onComplete)
+					getMonthEvents.onComplete();
 			}
 		}
 		// Setup the style + buttons
@@ -424,7 +435,7 @@ console.log('response for cal',cal,events);
 			} //for
 
 			// Adjust after rendering from callback is finished
-			//gadgets.window.adjustHeight(); // doesnt do anything
+			gadgets.window.adjustHeight(); // doesnt do anything?
 			document.getElementById("calDiv").style.height = document.body.clientHeight - 80; // using scrolling
 
 			// Fetch next months events
