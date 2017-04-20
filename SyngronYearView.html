@@ -1,20 +1,25 @@
 <Module>
 <ModulePrefs
-height="26"
-title="__MSG_Labs_Gadget_Year_View_Title__"
-description="__MSG_Labs_Gadget_Year_View_Description__"
-author="Syngron syngron.blogspot.com (based on Google code: http://www.google.com/ig/modules/calendar/year/year.xml, inspired by Grzegorz Pawlik year view)"
-author_email="syngron(a)gmail.com">
-<Require feature="views" />
-<Require feature="google.calendar-0.5" />
-<Require feature="google.calendar-0.5.read" />
-<Require feature="dynamic-height"/>
-<Locale messages="messages__en.xml"/>
+	height="52"
+	title="__MSG_Labs_Gadget_Year_View_Title__ v1.4"
+  	description="__MSG_Labs_Gadget_Year_View_Description__"
+  	author="David Hawley DaveHawley.com, based on Syngron syngron.blogspot.com, in turn based on Google code: http://www.google.com/ig/modules/calendar/year/year.xml, inspired by Grzegorz Pawlik year view)"
+  	author_email="info(a)davehawley.com">
+  <Require feature="views" />
+  <Require feature="google.calendar-0.5" />
+  <Require feature="google.calendar-0.5.read" />
+  <Require feature="dynamic-height"/>
+  <Locale messages="messages__en.xml"/>
 </ModulePrefs>
+<UserPref name="scroll" display_name="Display scrollbar" default_value="auto" datatype="enum">
+    <EnumValue value="auto" display_value="Automatic"/>
+    <EnumValue value="no" display_value="No"/>
+    <EnumValue value="yes" display_value="Yes"/>
+</UserPref>
 <Content type="html" view="home,profile">
 <![CDATA[
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html>s
 	<body>
 		<style>
 			body {
@@ -23,43 +28,67 @@ author_email="syngron(a)gmail.com">
 				padding: 0;
 				overflow: hidden;
 				font-family:Arial;
-				font-size: 12.8px;
+				font-size: 11px;
 			}
 		</style>
 		<script type="text/javascript">
 			function goToCanvas() {
 				var year = document.getElementById('year').value;
-				gadgets.views.requestNavigateTo('canvas', {'year': year});
+				var month = document.getElementById('startMonthInput').value;
+				var showDetails = document.getElementById('showDetails').checked == true;
+				gadgets.views.requestNavigateTo('canvas', {'year': year, 'startMonth': month, 'showDetails' : showDetails});
 				return false;
 			};
 </script>
 <form style="display:block; text-align:center; margin:0; padding:0" onsubmit="return goToCanvas();">
 	<input maxlength="4" id="year" value="2013" style="width: 4em; margin:2px 0">
-	<input type=submit value="__MSG_Labs_Go_To_Year__">
+	<select id="startMonthInput">
+		<option>1</option>
+		<option>2</option>
+		<option>3</option>
+		<option>4</option>
+		<option>5</option>
+		<option>6</option>
+		<option>7</option>
+		<option>8</option>
+		<option>9</option>
+		<option>10</option>
+		<option>11</option>
+		<option>12</option>
+	</select>
+	<label><input id="showDetails" type="checkbox">Details</label>
+	<br/>
+	<input type=submit style="float:left" value="__MSG_Labs_Go_To_Year__">
 </form>
 <script type="text/javascript">
 	document.getElementById('year').value = (new Date()).getFullYear();
-	gadgets.window.adjustHeight();
 	</script>
 </body>
 </html>
 ]]>
 </Content>
-<Content type="html" view="canvas">
+<Content type="html" view="canvas" preferred_height="800">
 <![CDATA[
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<body>
-		<form style="margin:8px 0; display:block" onsubmit="return display(0);">
-			<button onmousedown="display(-1)">&nbsp;&laquo;&nbsp;</button>&nbsp;
-			<input id="yearInput" size="4" value="" style="width: 4em" maxlength="4">&nbsp;
-			<button onmousedown="display(1)">&nbsp;&raquo;&nbsp;</button>&nbsp;
-			<input type=submit value="__MSG_Labs_Go_To_Year__"
-			onmousedown="display(0)">&nbsp;
-			<button onmousedown="displayCurrentYear()">__MSG_Labs_This_Year_Button__
-		</button></form>
-		<div id=calDiv></div>
+		<form style="margin:8px 0; display:block" onsubmit="return gotoInputYMwithYearDelta(0);">
+			<button onmousedown="gotoInputYMwithYearDelta(-1)">&nbsp;&laquo;&nbsp;</button>
+			&nbsp;
+			<input id="yearInput" size="4" value="" style="width: 4em" maxlength="4">
+			&nbsp;
+			<button onmousedown="gotoInputYMwithYearDelta(1)">&nbsp;&raquo;&nbsp;</button>
+			&nbsp;
+			<input type=submit value="__MSG_Labs_Go_To_Year__" onmousedown="gotoInputYMwithYearDelta(0)">
+			&nbsp;
+			<button onmousedown="gotoYear()">__MSG_Labs_This_Year_Button__</button>
+		</form>
+		<div id="calDiv" style="overflow-y:visible"></div>
 		<script>
+			var gShowDetails = gadgets.views.getParams()['showDetails'] == "true";
+			var gStartMonth = parseInt(gadgets.views.getParams()['startMonth']);
+			console.log(gShowDetails, gStartMonth);
+		
 			/** The full names of the months to use as titles */
 			var MONTH_NAMES = ["__MSG_January__", "__MSG_February__", "__MSG_March__",
 			"__MSG_April__", "__MSG_May__", "__MSG_June__", "__MSG_July__",
@@ -98,33 +127,39 @@ author_email="syngron(a)gmail.com">
 			* Get the text input for the year.
 			* @return {HTMLElement} The element.
 			*/
-			function getYearInput() {
+			function getYearInputElement() {
 				return document.getElementById('yearInput');
 			}
+
+			function onRendered() {
+				console.log("OnRendered");
+				gadgets.window.adjustHeight();
+			}
+
 			/**
 			* Display the current year.
 			* @param {string} opt_override An override year.
 			*/
-			function displayCurrentYear(opt_override) {
-				var year = opt_override || (new Date()).getFullYear();
-				currentYear = year;
-				getYearInput().value = year;
-				showYear(year);
+			function gotoYear(pYear) {
+				var year = pYear || (new Date()).getFullYear();
+				getYearInputElement().value = year;
+				showYear(year, onRendered);
 			}
-			var currentYear = (new Date()).getFullYear();
 			/**
-			* Display a year offset from the current one.
+			* Display a year offset from the YearInput form field
 			* @param {number} delta How many years to move.
 			*/
-			function display(delta) {
-				var yearInput = getYearInput();
+			function gotoInputYMwithYearDelta(delta) {
+				var yearInput = getYearInputElement();
+
+				// scrub the value
 				yearInput.value.replace(/[^0-9]/g, '');
 				var y = parseInt(yearInput.value, 10) + delta;
 				if (isNaN(y) || y > 9999 || y < 1){
 					yearInput.value = '?';
-					} else {
+				} else {
 					yearInput.value = y;
-					showYear(y);
+					showYear(y, onRendered);
 				}
 				return false;
 			}   
@@ -148,6 +183,32 @@ author_email="syngron(a)gmail.com">
 					google.calendar.showDate(y, m, opt_date || 1);
 				}
 			}
+
+			/**
+			* Ask the calendar to show a specific event
+			*/
+			function showEvent(id) {
+				if (google && google.calendar) {
+					google.calendar.showEvent(id);
+				}
+			}
+
+
+			var isToday = (function() {
+				var today = new Date();
+				var todayYear = today.getFullYear();
+				var todayMonth = today.getMonth();
+				var todayDate = today.getDate();
+
+				return function(y,m,d) {
+					return (y == todayYear && m == todayMonth && d == todayDate);
+				};
+			})();
+
+			function isWeekend(y,m,d) {
+				var dow = (new Date(y,m,d)).getDay();
+				return (dow == 0) || (dow == 6);
+			}
 			/**
 			* Get the HTML for a specific month.
 			* @param {Array<string>} out The string buffer to append the output.
@@ -155,10 +216,6 @@ author_email="syngron(a)gmail.com">
 			* @param {number} m The month.
 			*/
 			function getMonthHtml(out, y, m) {
-				var today = new Date();
-				var todayYear = today.getFullYear();
-				var todayMonth = today.getMonth();
-				var todayDate = today.getDate();
 				out.push('<table class="month" border=0 cellspacing=0>',
 					'<tr><td colspan=5 title="',
 							SHOW_MONTH, '" class="monthHeader clickable" ',
@@ -167,66 +224,85 @@ author_email="syngron(a)gmail.com">
 					var firstDate = new Date(y, m, 1);
 					var firstDayOfMonth = firstDate.getDay();
 					var daysInMonth = getDaysInMonth(firstDate);
-					var i = firstDayOfMonth % 7;
-					output = "month :"+(m+1) +"\n";
 					for(var d = 1; d <= daysInMonth; ++d) {
-						var dow = i % 7;
+						var dow = (firstDayOfMonth + d - 1) % 7;
 						out.push('<tr>');
-							out.push('<td class="dow" style="color:black">', DOW[dow], '</td>');
+							out.push('<td class="dow" style="color:black"', '>',
+								DOW[dow],
+								'</td>'
+							);
 							out.push('<td colspan=4');
 								out.push(" id='"+ y + "-" + (m+1) + "-" + d + "' ");
 								out.push('class="');
 								var c = 'normal';
-								if (y == todayYear && m == todayMonth && d == todayDate){
+								if(isToday(y,m,d))
 									c = 'today';
-								}
-								if ((d <= daysInMonth) && ((dow == 0) || (dow == 6))){
-									c = 'weekend ';
-								}
-								out.push(c);
-								out.push(' clickable" onclick="showDate(', y, ',', m+1, ',', d,
-								')">', d, '</td>');
+								else 
+									if(isWeekend(y,m,d))
+										c = 'weekend';
+								out.push(c, ' clickable', '"');
+								out.push(' onclick="showDate(', y, ',', m+1, ',', d, ')"');
+								out.push('>',d,'</td>');
 							out.push('</tr>');
-						i++;
 					}
-					//var output = "month: "+(m+1)+" ";
-					//for(x in monthEvents) {
-						//  output += x + " " + monthEvents[x] + "\n";
-						//}
-					//alert(output);
 					out.push('</td>');
 				out.push('</table>');
 		}
+
 		/**
 		* This is the main drawing function. It will display a specific year.
 		* @param {number} year The year to draw.
 		*/
-		function showYear(y) {
+		// showYear => (output months); => getMonthEvents => receive callback => render, getMonthEvents
+		function showYear(y, callback) {
 			var out = ['<table>'];
-				for (var m = 0; m < 12; ++m) {
-					out.push('<td class="outer">');
-					getMonthHtml(out, y, m);
-					out.push('</td>');
-				}
-				out.push('</table>');
-				document.getElementById('calDiv').innerHTML = out.join('');
-				month = 1;
-				getMonthEvents();
+
+			// render
+			for (var m = 0; m < 12; ++m) {
+				out.push('<td class="outer">');
+				getMonthHtml(out, (y + Math.floor((m+gStartMonth-1)/12)), (m + gStartMonth-1) % 12);
+				out.push('</td>');
+			}
+			out.push('</table>');
+			document.getElementById('calDiv').innerHTML = out.join('');
+			getMonthEvents.onComplete = callback;
+			getMonthEvents(y, gStartMonth);
 		}
-		var month = 1;
-		function getMonthEvents() {
+		function getMonthEvents(year,month) { // optional parameters. Running copies are kept as function properties
+			if(typeof(year) != "undefined") {
+				// initial setup. These are the variables that the rendering callback will use
+				;
+				getMonthEvents.year = year;
+				getMonthEvents.month = month;
+			} else {
+				// Bump. Note we don't support going past 12 months.
+				year = getMonthEvents.year;
+				month = ++getMonthEvents.month;
+				if(month > 12) {
+					year++;
+					month -= 12;
+				}
+			}
+
+			console.log('getMonthEvents',year,month);
 			if(month <= 12) {
-				year = currentYear;
-				nxtMonth = parseInt(month)+1;
+				nxtMonth = month + 1;
 				nxtYear = year;
 				if(nxtMonth > 12) {
 					nxtMonth = 1;
-					nxtYear = parseInt(year)+1;
+					nxtYear = year + 1;
 				}
 				startDate = {year: year, month: month, date: 1, hour: 0, minute: 0, second: 0};
 				endDate = {year: nxtYear, month: nxtMonth, date: 1, hour: 0, minute: 0, second: 0};
-				google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate);
-				month = parseInt(month)+1;
+				console.log('google.calendar.read.getEvents',startDate,endDate,gadgets.views.getParams());
+				if(gShowDetails)
+					google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate, { 'requestedFields': [ 'details'] });
+				else
+					google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate);
+			} else {
+				//Done!
+				if(getMonthEvents.onComplete)
+					getMonthEvents.onComplete();
 			}
 		}
 		// Setup the style + buttons
@@ -260,68 +336,114 @@ author_email="syngron(a)gmail.com">
 				'td.monthHeader {font-weight:bold}',
 				'.month {table-layout: fixed; width: 100%; background-color:', LIGHT_BLUE,
 					';border: 1px solid ', BORDER_GREY, '}',
-				'body, td {font-family:Arial;font-size: 12.8px}',
+				'body, td {font-family:Arial;font-size: 11px}',
 				'body {margin-left:10px; background-color:', WHITE, '}',
 				'td {vertical-align: top}',
 				'.clickable {cursor:pointer; color:', DARK_BLUE, '}',
 				'.clickable:hover {text-decoration: underline}', 
 				'.row {display: table;}',
-				'.busy {color: red; }');
+				'.event { color: black; }',
+				'.outside { border:2px solid black; }',
+				'.busy { color: red; }'
+				);
 				out.push('</style>');
 			return out.join('');
 		}
 		document.write(getStyles());
-		var tentativeYear = gadgets.views.getParams()['year'];
-		displayCurrentYear(tentativeYear);
+		gotoYear(parseInt(gadgets.views.getParams()['year'],10));
+
 		// This is here to make it look nicer for gmail
 		gadgets.window.adjustHeight(2600);
-		//for(i=1; i<=12; i++ ) {
-			//	year = tentativeYear;
-			//	month = i;
-			//	nxtMonth = parseInt(month)+1;
-			//	nxtYear = year;
-			//	if(nxtMonth > 12) {
-				//		nxtMonth = 1;
-				//		nxtYear = parseInt(year)+1;
-				//	}
-			//	startDate = {year: year, month: month, date: 1, hour: 0, minute: 0, second: 0};
-			//	endDate = {year: nxtYear, month: nxtMonth, date: 1, hour: 0, minute: 0, second: 0};
-			//	google.calendar.read.getEvents(eventCallback, "selected", startDate, endDate);
-			//}
+
 		function eventCallback(response) {
+			function renderAllDayEvent(e) {
+				// The endTime provided by the Calendar is the day after the actual end
+				var result = e.startTime.month + "/" +  e.startTime.date;
+				var startDate = new Date(e.startTime.year, e.startTime.month-1, e.startTime.date);
+				var endDate = new Date(e.endTime.year, e.endTime.month-1, e.endTime.date-1);
+				//console.log(startDate, endDate);
+				if(endDate.valueOf() != startDate.valueOf())
+					result += " - " + (endDate.getMonth() + 1) + "/" +  endDate.getDate();
+
+				return result;
+			}
+			function renderDateTime(d) {
+				var result = d.month + "/" + d.date;
+
+				var hour = d.hour ? d.hour : 0;
+				var minute = d.minute ? d.minute : 0;
+				result += " ";
+				result += (hour < 10) ? ("0" + hour) : hour;
+				result += ":";
+				result += (minute < 10) ? ("0" + minute) : minute;
+
+				return result;
+			}
 			for(var cal = 0; cal < response.length; ++cal) {
 				if ('error' in response[cal]) {
 					alert('Something went wrong ' + response[cal]['error']);
 					return;
 				}
 				var events = response[cal]['events'];
+console.log('response for cal',cal,events);
 				var output = "";
 				for(var i = 0; i < events.length; ++i) {
 					var e = events[i];
 					if ('title' in e) {
+						// Loop over all days overlapping with the event
 						var startDate = new Date(e.startTime.year, (e.startTime.month-1), e.startTime.date);
-						var endDate = new Date(e.endTime.year, (e.endTime.month-1), e.endTime.date);
-						var currentDate = startDate;//new Date(startDate.getTime());
-						while(currentDate.getTime() <= endDate.getTime()) {
-							id = currentDate.getFullYear() + "-" + (currentDate.getMonth()+1) + "-" + currentDate.getDate();
-							// prevent double entries
-							if((currentDate.getDate() == endDate.getDate() && e.allDay == true) || (currentDate.getMonth() + 2) != month) {
-								currentDate.setDate(currentDate.getDate() + 1);
-								continue;
-							}
-							document.getElementById(id).className += " busy ";
-							document.getElementById(id).title += e.title + " " + e.startTime.date + " " + e.endTime.date+ "; \n";
-							document.getElementById(id).innerText += "\n" + e.title.substr(0,14);
-							currentDate.setDate(currentDate.getDate() + 1);
-						}
-					}
-				}
-			}
+						var endDate = e.allDay
+								? new Date(e.endTime.year, (e.endTime.month-1), e.endTime.date - 1)
+								: new Date(e.endTime.year, (e.endTime.month-1), e.endTime.date);
+						//console.log("event render", e.title, e.startTime, e.endTime, e.allDay, startDate, endDate);
+						for(var d = startDate;
+							d.getTime() <= endDate.getTime();
+							d.setDate(d.getDate() + 1)
+						) {
+
+							id = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
+							var eltDay = document.getElementById(id);
+							if(eltDay == null)
+								console.log('Day element is missing',id);
+							else {
+								// decode &#nnn style escapes
+								var title = e.title.replace(/&#(\d+);/g, function(match, dec) { return String.fromCharCode(dec); })
+
+								eltDay.className += " busy ";
+								var elt = document.createElement("div");
+								eltDay.appendChild(elt);
+								elt.title = title + ": " + (
+									e.allDay
+									? renderAllDayEvent(e)
+									: (renderDateTime(e.startTime) + " - " + renderDateTime(e.endTime))
+								);
+								elt.innerText = title.substr(0,14);
+								elt.style.backgroundColor = e.color;
+								elt.className = "event clickable";
+								elt.setAttribute('onclick', ['showEvent("', e.id, '")'].join(''));
+								if(e.location) {
+									elt.className += " outside";
+									elt.title += " [" +  e.location + "]" ;
+								}
+//console.log(e);
+								if(e.details)
+									elt.title += "\x0A" + e.details;
+							} //else
+						} //for
+					} //if
+				} //for
+			} //for
+
+			// Adjust after rendering from callback is finished
+			gadgets.window.adjustHeight(); // doesnt do anything?
+			document.getElementById("calDiv").style.height = document.body.clientHeight - 80; // using scrolling
+
+			// Fetch next months events
 			getMonthEvents();
-		}
+		}		
 	</script>
 </body>
-				</html>
-				]]>
-				</Content>
-				</Module>
+</html>
+]]>
+</Content>
+</Module>
