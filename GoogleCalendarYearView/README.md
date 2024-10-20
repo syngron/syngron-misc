@@ -15,11 +15,11 @@ however I was always annoyed by two things. One of those things was the
 missing year view which I fixed now by programming a new Google Calendar
 Gadget which you can find on my Github page. It creates a year view with
 each month in one row and all the events from your selected calendars:  
-<https://raw.github.com/syngron/misc/master/SyngronYearView.html>  
+<https://raw.github.com/syngron/misc/master/GoogleCalendarYearView/SyngronYearView.html>  
 
 To add the Gadget to your calendar just follow the link below while you
 are logged in to your Google account:  
-<https://www.google.com/calendar/render?gadgeturl=https://raw.github.com/syngron/misc/master/SyngronYearView.html>  
+<https://www.google.com/calendar/render?gadgeturl=https://raw.github.com/syngron/misc/master/GoogleCalendarYearView/SyngronYearView.html>  
   
 The other annoying thing is not being able to smoothly scroll between
 months in the Google Calendar. At the end of the month I am not
