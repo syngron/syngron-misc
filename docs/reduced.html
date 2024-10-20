@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Global weather comparison of cities over time and location</title>
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/d3.css" />
+<link rel="stylesheet" href="css/leaflet.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="syngron (syngron@gmail.com)" />
+<meta name="keywords" content="weather,data,maps,python" />
+<meta name="description" content="Tool which allows to compare daily temperatures, rainfall and monthly sunshine hours at more than 14.000 locations world-wide. Different days can be shown on an interactive map and two places can be compared directly as time-series." />
+
+</head>
+<body>
+  <div id='map'>
+  </div>
+  <div id="dateform", class="dateform">
+	<form method="post" action=" ">
+     <label>
+		 <p>
+  			Startyear:
+  			<select id="startyear" size="1">
+  			  <option selected=1>2005</option>
+  			  <option>2006</option>
+  			  <option>2007</option>
+  			  <option>2008</option>
+  			  <option>2009</option>
+  			  <option>2010</option>
+  			  <option>2011</option>
+  			  <option>2012</option>
+  			  <option>2013</option>
+  			  <option>2014</option>
+  			</select>
+  			Endyear:
+  			<select id="endyear" size="1">
+  			  <option>2005</option>
+  			  <option>2006</option>
+  			  <option>2007</option>
+  			  <option>2008</option>
+  			  <option>2009</option>
+  			  <option>2010</option>
+  			  <option>2011</option>
+  			  <option>2012</option>
+  			  <option>2013</option>
+  			  <option selected=1>2014</option>
+  			</select>
+		 </p>
+    		Month:
+  			<select id="month" size="1">
+  			  <option>January</option>
+  			  <option>February</option>
+  			  <option>March</option>
+  			  <option>April</option>
+  			  <option>May</option>
+  			  <option>June</option>
+  			  <option>July</option>
+  			  <option>August</option>
+  			  <option>September</option>
+  			  <option>October</option>
+  			  <option>November</option>
+  			  <option>December</option>
+  			</select>
+			Day:
+    		<input id="day" type="number" min="1" max="31" step="1" value="1">
+			<button type="button" id="decrease"><</button>
+			<button type="button" id="increase", class="submitbutton">></button>
+     </label>
+	</form>
+  </div>
+  <div id='selections' class="selections">
+    <a href='#' class="show">Choose measurement</a>
+    <div class='content'>
+      <a href='#' class="hide">Hide</a>
+      <div id="toggles">
+      </div>
+    </div>
+  </div>
+  <div id='loading'>
+  </div>
+ <div id='selected'>
+	 <h1>--------------> Click on 2 dots or cells after each other to compare stations <--------------</h1>
+  </div>
+  <div id='explanation'>
+	<a href='#' class="show">Help/About</a>
+	<p class='content'> <a href='#' class="hide">Hide</a></p>
+	<p class='content'>
+	The map is interactive and shows climate data at different stations. The kind of data can be selected on the top right side. The data is from one day which can be chosen on the bottom left side. The data of each day is the average (median) from the chosen yearspan. By clicking on two stations/cells in the map, the complete yearly data of these stations can be compared in the plot below the map. That plot furthermore contains an interactive zoom at the bottom. More information on <a href="http://www.syngron.com/global-weather-data-comparison.html" target="_blank">my blog</a>.
+	<ul class='content'>
+	<li>Created by <a href="http://www.syngron.com", target="_blank">syngron at gmail.com</a></li>
+	<li>Powered by data from <a href="http://www.ncdc.noaa.gov/oa/climate/ghcn-daily/", target="_blank">NOAA GHCN</a> and <a href="http://www.dwd.de/DE/leistungen/cdcftp/cdcftp.html", target="_blank">Deutscher Wetterdienst</a></li>
+	<li>Inspired by code from <a href="http://bl.ocks.org/mbostock/7608400", target="_blank">Mike Bostock</a> and <a href="http://chriszetter.com/blog/2014/06/15/building-a-voronoi-map-with-D3-and-leaflet/", target="_blank">Chris Zetter</a></li>
+	<li>Using the plotting library <a href="http://d3js.org/", target="_blank">D3</a> and mapping library <a href="http://leafletjs.com/", target="_blank">Leaflet</a></li>
+	<ul>
+	</p>
+	<br/>
+  </div>
+  <div id='maplegend'>
+    <a href='#' class="show">Legend</a>
+    <p class='content'>
+      <a href='#' class="hide">Hide</a>
+	</p>
+	<div class='info legend'>
+		<p class='content'>°C / mm</p>
+		<p class='content'><i style="background:#bd0026"></i><i style="background:#08519c"></i>40 / 5</p>
+		<p class='content'><i style="background:#e31a1c"></i><i style="background:#2171b5"></i>30 / 4</p>
+	  	<p class='content'><i style="background:#fd8d3c"></i><i style="background:#6baed6"></i>20 / 3</p>
+	  	<p class='content'><i style="background:#feb24c"></i><i style="background:#9ecae1"></i>10 / 2</p>
+	  	<p class='content'><i style="background:#ffeda0"></i><i style="background:#deebf7"></i>0 / 1</p>
+	  	<p class='content'><i style="background:#ffffcc"></i><i style="background:#f7fbff"></i>-10 / 0</p>
+  	</div>
+  </div>
+  <div id='svg' class='d3plot'>
+  </div>
+  <div id='footer' class='footer'>
+	  &copy; 2016 Syngron
+  </div>
+
+  <script src="lib/d3.v3.min.js"></script>
+  <script src="lib/leaflet.js"></script>
+  <script src="lib/chroma.js"></script>
+
+  <script src="variables.js"></script>
+  <script>
+	daysplitdir = "daysplit_nonan/";
+  </script>
+  <script src="voronoi-map.js"></script>
+  <script src="d3-plot.js"></script>
+  <script src="main.js"></script>
+
+</body>
+</html>
