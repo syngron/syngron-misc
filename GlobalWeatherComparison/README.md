@@ -5,7 +5,7 @@ Tags: weather, data, maps, python
 Slug: global-weather-data-comparison
 Author: syngron (syngron@gmail.com)
 
-tl;dr: I wrote a tool which allows to compare daily temperatures, rainfall and monthly sunshine hours at more than 14.000 locations world-wide. Different days can be shown on an interactive map and two places can be compared directly as time-series: ** [Weather comparison of different cities over time](weather/index.html) **
+tl;dr: I wrote a tool which allows to compare daily temperatures, rainfall and monthly sunshine hours at more than 14.000 locations world-wide. Different days can be shown on an interactive map and two places can be compared directly as time-series: ** [Weather comparison of different cities over time](http://syngron.github.io/syngron-misc/) **
 
 ![Screenshot of global weather comparison tool](images/global-weather-comparison.png)
 *Screenshot from the weather comparison tool. The map shows the median over the last 10 years of the maximum temperature of January 1. The plot at the bottom compares the maximum temperature of Stuttgart (Germany) and Rome (Italy) over the complete year. The black line shows the 10-year median and the regions around the lines indicate the 10-year minimum and maximum.*
@@ -61,7 +61,7 @@ A restriction is the inclusion of data from mountain top stations which then fil
 
 In the mean time I found another example where somebody visualized the [Temperature, humidity and wind gusts of USA](http://mashup.mesowest.net/voroWeather.html) in a similar way. However it is restricted to the US and does not plot the station to station comparison.
 
-Check out the application at ** [Weather comparison of different cities over time](weather/index.html) ** and give me feedback. Tell me especially if you miss some statistic. The dataset contains various more parameters as for example wind etc.
+Check out the application at ** [Weather comparison of different cities over time](http://syngron.github.io/syngron-misc/) ** and give me feedback. Tell me especially if you miss some statistic. The dataset contains various more parameters as for example wind etc.
 
 **Update:** 
 Unfortunately the daily sunshine hours from the GHCN dataset are only available for few stations in the US and I could not find another **global and daily** statistic about sunshine hourse. 
