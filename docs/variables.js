@@ -3,8 +3,10 @@ var debug = false;
 
 var initialGHCN1 = ["GME00115771", "STUTTGART-SCHNARRENBERG"];
 var initialGHCN2 = ["IT000016239", "ROMA CIAMPINO"];
-var initialISD1 = ["10738099999", "STUTTGART GM"];
-var initialISD2 = ["16171099999", "FIRENZE IT"];
+//var initialISD1 = ["10738099999", "STUTTGART GM"];
+//var initialISD2 = ["16171099999", "FIRENZE IT"];
+var initialISD1 = ["10727599999", "KARLSRUHE BADEN BADEN GM"];
+var initialISD2 = ["16239099999", "CIAMPINO IT"];
 var initialWMO1 = ["WMO10738", "STUTTGART-ECHTERDINGEN"];
 var initialWMO2 = ["WMO16224", "VIGNA DI VALLE"];
 var initialDWD1 = ["DWD04931", "Stuttgart-Echterdingen"];

@@ -1,0 +1,122 @@
+id,name,latitude,longitude,elev,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019
+DWD00001,Aach Baden-Wuerttemberg,47.84130,8.84930,478.0,nan,2.4,9.2,1.2,8.7,1.7,7.2,3.0,3.0,1.4,nan,nan,nan,nan,nan
+DWD00001,Aach Baden-Wuerttemberg,47.84130,8.84930,478.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00003,Aachen Nordrhein-Westfalen,50.78270,6.09410,202.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00003,Aachen Nordrhein-Westfalen,50.78270,6.09410,202.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00044,Grossenkneten Niedersachsen,52.93350,8.23700,44.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00052,Ahrensburg-Wulfsdorf Schleswig-Holstein,53.66230,10.19900,46.0,nan,1.3,10.3,1.9,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00052,Ahrensburg-Wulfsdorf Schleswig-Holstein,53.66230,10.19900,46.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00061,Aiterhofen Bayern,48.84430,12.61710,339.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00070,Albstadt-Ebingen Baden-Wuerttemberg,48.20520,9.03710,712.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00071,Albstadt-Badkap Baden-Wuerttemberg,48.21550,8.97840,759.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00072,Albstadt-Onstmettingen Baden-Wuerttemberg,48.27660,9.00010,794.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00073,Aldersbach-Kriestorf Bayern,48.61590,13.05060,340.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00078,Alfhausen Niedersachsen,52.48500,7.91190,65.0,nan,0.7,12.1,2.3,10.1,2.1,7.4,2.4,5.6,6.7,nan,nan,nan,nan,nan
+DWD00078,Alfhausen Niedersachsen,52.48500,7.91190,65.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00091,Alsfeld-Eifa Hessen,50.74460,9.34500,300.0,nan,4.4,7.4,4.1,10.7,8.5,7.9,2.7,2.0,3.7,nan,nan,nan,nan,nan
+DWD00091,Alsfeld-Eifa Hessen,50.74460,9.34500,300.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00093,Alsfeld-Reibertenrod Hessen,50.76910,9.25420,269.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00098,Altastenberg Nordrhein-Westfalen,51.18900,8.46710,780.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00150,Alzey Rheinland-Pfalz,49.72720,8.11600,215.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00177,Ansbach-Hennenbach Bayern,49.31580,10.58150,418.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00211,Asslar Klein-Altenstaedten Hessen,50.57990,8.46820,200.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00273,Baindt Baden-Wuerttemberg,47.84130,9.66060,467.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00326,Beckum-Unterberg Nordrhein-Westfalen,51.72040,8.05770,120.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00377,Bergzabern Bad Rheinland-Pfalz,49.10700,7.99670,252.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00420,Berlin-Marzahn Berlin,52.54470,13.55980,60.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00445,Bernburg/Saale (Nord) Sachsen-Anhalt,51.82180,11.71090,84.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00554,Bocholt-Liedern (Wasserwerk) Nordrhein-Westfalen,51.82930,6.53650,23.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00603,Bonn-Roleber Nordrhein-Westfalen,50.73490,7.19310,159.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00652,Hagenbuechach Bayern,49.53530,10.77060,384.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00703,Bremervoerde (A) Niedersachsen,53.47790,9.15530,5.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00755,Buchen Kr. Neckar-Odenwald Baden-Wuerttemberg,49.51810,9.32140,340.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00817,Burgwald-Bottendorf Hessen,51.03060,8.81460,293.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00867,Lautertal-Oberlauter Bayern,50.30670,10.96800,345.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00931,Deggenhausertal-Azenweiler Baden-Wuerttemberg,47.80070,9.41080,708.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD00983,Dillingen/Donau-Fristingen Bayern,48.55620,10.55990,419.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD01052,Drewitz bei Burg Sachsen-Anhalt,52.21720,12.16350,80.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD01093,Eberbach (LUBW) Baden-Wuerttemberg,49.46000,8.95840,131.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD01172,Einbeck Niedersachsen,51.81890,9.88710,123.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD01221,Emden-Wolthusen Niedersachsen,53.37070,7.22360,0.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD01266,Erfde Schleswig-Holstein,54.29890,9.31610,18.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD01300,Eslohe Nordrhein-Westfalen,51.25400,8.15630,351.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD01358,Fichtelberg Sachsen,50.42830,12.95350,1213.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD01421,Frankfurt/Main (Stadt) Hessen,50.14740,8.67460,125.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD01468,Freudenstadt Baden-Wuerttemberg,48.45370,8.40910,797.0,nan,12.5,8.5,12.2,8.3,10.0,10.7,12.5,13.7,10.9,nan,nan,nan,nan,nan
+DWD01526,Fulda Hessen,50.53350,9.67500,255.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD01602,Ohlsbach Baden-Wuerttemberg,48.43290,7.99310,176.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD01667,Glueckstadt Schleswig-Holstein,53.79700,9.42950,1.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD01759,Greifswalder Oie Mecklenburg-Vorpommern,54.24370,13.91020,12.0,nan,14.2,11.2,8.5,10.4,11.5,12.9,9.2,11.5,15.6,nan,nan,nan,nan,nan
+DWD01891,Guetersloh Nordrhein-Westfalen,51.88750,8.35430,72.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD01987,Hamburg-Sankt Pauli Hamburg,53.54680,9.96640,35.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD02053,Hasselfelde Sachsen-Anhalt,51.68680,10.86310,461.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD02110,Heinsberg-Schleiden Nordrhein-Westfalen,51.04120,6.10410,57.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD02171,Hersfeld Bad Hessen,50.85190,9.73780,272.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD02252,Bertsdorf-Hoernitz Sachsen,50.89940,14.74560,270.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD02318,Holzhausen a.d. Haide Rheinland-Pfalz,50.21820,7.91330,397.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD02360,Huell Bayern,48.60180,11.67690,438.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD02429,Itzehoe Schleswig-Holstein,53.98970,9.56960,21.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD02485,Kaisersbach-Cronhuette Baden-Wuerttemberg,48.91710,9.68720,489.0,nan,nan,nan,nan,nan,nan,nan,9.1,9.3,8.9,nan,nan,nan,nan,nan
+DWD02533,Kassel-Harleshausen Hessen,51.33400,9.45060,198.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD02600,Kitzingen Bayern,49.73610,10.17820,188.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD02657,Koblenz-Horchheim Rheinland-Pfalz,50.33690,7.59920,85.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD02708,Kohlgrub Bad (Rosshof) Bayern,47.66520,11.08040,740.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD02790,Kusel-Fuenfbirken Rheinland-Pfalz,49.55920,7.41340,296.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD02857,Langensalza Bad Thueringen,51.11730,10.65680,175.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD02915,Lehesten/Thueringer Wald Thueringen,50.48330,11.45000,640.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD02953,Lenzkirch-Ruhbuehl Baden-Wuerttemberg,47.85970,8.23080,852.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD03018,Lindenfels-Winterkasten Hessen,49.71170,8.78040,445.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD03062,Lorch/Rhein Hessen,50.03520,7.81970,100.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD03103,Lueneburg Niedersachsen,53.26570,10.42400,11.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD03164,Coelbe Kr. Marburg-Biedenkopf Hessen,50.84920,8.77460,182.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD03226,Aschersleben-Mehringen Sachsen-Anhalt,51.72590,11.51110,107.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD03268,Messstetten Baden-Wuerttemberg,48.18750,8.99380,920.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,8.9,nan,nan,nan,nan,nan
+DWD03317,Moelln Schleswig-Holstein,53.61280,10.69430,42.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD03382,Muenchen-Bogenhausen Bayern,48.14410,11.60000,521.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD03442,Nauheim Bad Hessen,50.35740,8.75060,149.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD03527,Neukirchen-Hauptschwenda Hessen,50.89240,9.40530,500.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD03576,Neustadt/Weinstrasse (Heidehof) Rheinland-Pfalz,49.34780,8.18220,125.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD03623,Noervenich (Flugplatz) Nordrhein-Westfalen,50.82940,6.66020,111.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD03672,Nufringen Baden-Wuerttemberg,48.62070,8.89620,457.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD03752,Ochsenkopf Bayern,50.03000,11.80740,1014.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD03821,Osterfeld Sachsen-Anhalt,51.08730,11.92920,246.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD03897,Pelzerhaken Schleswig-Holstein,54.08930,10.87730,1.0,nan,nan,10.5,8.8,9.5,11.6,10.1,9.5,9.8,12.2,nan,nan,nan,nan,nan
+DWD03946,Plauen Sachsen,50.48190,12.13000,386.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD04032,Quedlinburg Sachsen-Anhalt,51.79540,11.13190,142.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD04094,Weingarten Kr. Ravensburg Baden-Wuerttemberg,47.80620,9.62060,440.0,nan,9.3,8.1,9.0,7.4,9.2,8.5,8.9,10.3,8.2,nan,nan,nan,nan,nan
+DWD04166,Reutlingen-Betzingen Baden-Wuerttemberg,48.50510,9.18330,360.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD04271,Rostock-Warnemuende Mecklenburg-Vorpommern,54.18020,12.08050,4.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD04323,Ruppertsecken Rheinland-Pfalz,49.64670,7.88350,461.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD04371,Salzuflen Bad Nordrhein-Westfalen,52.10420,8.75210,135.0,nan,10.7,9.8,7.8,6.5,9.5,9.7,9.7,10.4,11.4,nan,nan,nan,nan,nan
+DWD04433,Schemmerhofen-Ingerkingen Baden-Wuerttemberg,48.19940,9.77000,519.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD04480,Schluechtern-Herolz Hessen,50.34440,9.55390,230.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD04560,Schotten Hessen,50.49270,9.12280,265.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD04605,Schwarzburg Thueringen,50.64440,11.19330,277.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD04702,Sigmaringen (Flugplatz) Baden-Wuerttemberg,48.10000,9.25000,645.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD04748,Sondershausen Thueringen,51.35200,10.90590,216.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD04857,Mittelnkirchen-Hohenfelde Niedersachsen,53.55120,9.60820,1.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD04933,Stuttgart-Hohenheim Baden-Wuerttemberg,48.71370,9.20920,401.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD05032,Thuengersheim Bayern,49.88500,9.84630,195.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD05088,Trent Mecklenburg-Vorpommern,54.53370,13.24600,3.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD05128,Tuttlingen-Moehringen Baden-Wuerttemberg,47.95520,8.75650,675.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD05229,Villingen-Schwenningen Baden-Wuerttemberg,48.04520,8.46080,720.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD05282,Wahnsdorf bei Dresden Sachsen,51.11970,13.67440,246.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD05347,Warburg Nordrhein-Westfalen,51.50400,9.11180,236.0,nan,10.5,9.4,9.2,6.5,10.3,11.1,10.9,10.7,11.3,nan,nan,nan,nan,nan
+DWD05410,Weilburg (Klaeranlage) Hessen,50.47320,8.25880,150.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD05445,Weissensee-Ottenhausen Thueringen,51.21200,10.99560,165.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD05516,Fehmarn Schleswig-Holstein,54.52840,11.06050,3.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD05609,Winterbach Rems-Murr-Kreis Baden-Wuerttemberg,48.80320,9.46970,240.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD05675,Wolfsburg Niedersachsen,52.44110,10.75870,56.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD05728,Wustrau-Ziethenhorst Brandenburg,52.80390,12.87140,35.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD05800,Zwiesel Bayern,49.02800,13.23850,615.0,nan,nan,9.9,11.3,7.8,10.8,10.7,9.1,9.8,10.1,nan,nan,nan,nan,nan
+DWD05890,Kohlgrub Bad (A) Bayern,47.67770,11.04730,850.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD06095,Taubenheim-Seeligstadt Sachsen,51.08380,13.44860,273.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD06170,Coschen Brandenburg,52.01920,14.72540,40.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD06259,Grosserlach-Mannenweiler Baden-Wuerttemberg,49.02100,9.60320,523.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD06304,Pilsach-Litzlohe Bayern,49.35330,11.50530,550.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD07075,Elsendorf-Horneck Bayern,48.70210,11.84940,425.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD07330,Arnsberg-Neheim Nordrhein-Westfalen,51.46340,7.97800,159.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD07370,Waldmuenchen Bayern,49.39090,12.68380,499.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD07412,Neuhuetten/Spessart Bayern,50.00830,9.42390,340.0,nan,nan,9.5,9.7,7.3,10.8,10.0,10.3,11.9,9.3,nan,nan,nan,nan,nan
+DWD13675,Hameln-Hastenbeck Niedersachsen,52.08170,9.40720,77.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+DWD15000,Aachen-Orsbach Nordrhein-Westfalen,50.79820,6.02440,231.0,nan,nan,nan,nan,nan,nan,10.3,10.6,13.8,10.1,nan,nan,nan,nan,nan
